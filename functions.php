@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'VLAC_VERSION' ) ) {
-	define( 'VLAC_VERSION', '1.2.0' );
+	define( 'VLAC_VERSION', '1.3.0' );
 }
 
 /**
@@ -306,6 +306,23 @@ function vlac_customize_register( $wp_customize ) {
 		'con_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Crea contratos, controla sus cuotas y no vuelvas a perder de vista un pago.', 'textarea' ),
 	);
 	vlac_add_fields( $wp_customize, $con_fields, 'vlac_con' );
+
+	/* ---------- Página Compras y Proveedores ---------- */
+	$wp_customize->add_section(
+		'vlac_cp',
+		array(
+			'title' => __( 'Página Compras y Proveedores', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$cp_fields = array(
+		'cp_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Compras y Proveedores', 'text' ),
+		'cp_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'Controla tus <span class="accent">compras</span> y tus <span class="accent">proveedores</span> de punta a punta', 'html' ),
+		'cp_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Un directorio completo de proveedores conectado a tus pedidos de compra: cotiza, confirma, registra facturas y controla lo pagado y lo pendiente.', 'textarea' ),
+		'cp_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Ordena tus compras y proveedores hoy', 'text' ),
+		'cp_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Centraliza tus proveedores, controla cada pedido y no vuelvas a perder de vista un pago.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $cp_fields, 'vlac_cp' );
 
 	/* ---------- Barra superior / botones del header ---------- */
 	$wp_customize->add_section(
