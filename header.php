@@ -66,7 +66,7 @@
 							<div class="mega-col">
 								<h5>Compras e inventario</h5>
 								<a href="<?php echo esc_url( home_url( '/compras-proveedores/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.6" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="18" r="1.6" stroke="currentColor" stroke-width="1.6"/></svg>Gestión de compras y proveedores</a>
-								<a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zm0 0v18M4 7.5l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Gestión de inventario y productos</a>
+								<a href="<?php echo esc_url( home_url( '/inventario/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zm0 0v18M4 7.5l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Gestión de inventario y productos</a>
 							</div>
 							<div class="mega-col">
 								<h5>Finanzas e informes</h5>
@@ -142,7 +142,7 @@
 		<h6>Facturación y ventas</h6>
 		<a href="<?php echo esc_url( home_url( '/facturacion/' ) ); ?>">Facturador FEL</a><a href="<?php echo esc_url( home_url( '/ventas-clientes/' ) ); ?>">Gestión de ventas y clientes</a><a href="<?php echo esc_url( home_url( '/contratos/' ) ); ?>">Gestión de contratos</a>
 		<h6>Compras e inventario</h6>
-		<a href="<?php echo esc_url( home_url( '/compras-proveedores/' ) ); ?>">Gestión de compras y proveedores</a><a href="#">Gestión de inventario y productos</a>
+		<a href="<?php echo esc_url( home_url( '/compras-proveedores/' ) ); ?>">Gestión de compras y proveedores</a><a href="<?php echo esc_url( home_url( '/inventario/' ) ); ?>">Gestión de inventario y productos</a>
 		<h6>Finanzas e informes</h6>
 		<a href="#">Gestión financiera</a><a href="#">Informes</a>
 		<h6>Administración</h6>

@@ -31,14 +31,20 @@ $img_dir = get_template_directory() . '/assets/img/';
 $vid_url = get_template_directory_uri() . '/assets/video';
 $vid_dir = get_template_directory() . '/assets/video/';
 
-// Renderiza una captura enmarcada (o un marcador si el archivo no existe).
-$cp_shot = function ( $file, $caption ) use ( $img, $img_dir ) {
+// Renderiza una captura enmarcada. Prioridad de la imagen:
+//   1) La elegida en el Personalizador (Biblioteca de medios de WordPress).
+//   2) El archivo en /assets/img/.
+//   3) Un marcador con las instrucciones.
+$cp_shot = function ( $file, $caption, $opt_key = '' ) use ( $img, $img_dir ) {
+	$url    = $opt_key ? vlac_opt( $opt_key ) : '';
 	$exists = file_exists( $img_dir . $file );
 	echo '<figure class="cp-shot"><div class="cp-frame"><div class="bar"><i></i><i></i><i></i></div>';
-	if ( $exists ) {
+	if ( $url ) {
+		printf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $url ), esc_attr( $caption ) );
+	} elseif ( $exists ) {
 		printf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $img . '/' . $file ), esc_attr( $caption ) );
 	} else {
-		printf( '<div class="cp-ph cp-ph-img">Coloca la imagen<br><code>assets/img/%s</code></div>', esc_html( $file ) );
+		printf( '<div class="cp-ph cp-ph-img">Elige la imagen en <b>Personalizar → Página Compras y Proveedores</b><br>o sube <code>assets/img/%s</code></div>', esc_html( $file ) );
 	}
 	echo '</div>';
 	if ( $caption ) {
@@ -164,7 +170,11 @@ $cp_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
 				</div>
 
 				<div class="cp-visual">
-					<?php $cp_shot( file_exists( $img_dir . 'cp-hero.png' ) ? 'cp-hero.png' : 'cp-pedido.png', '' ); ?>
+					<?php
+					$cp_hero_key  = vlac_opt( 'cp_img_hero' ) ? 'cp_img_hero' : 'cp_img_pedido';
+					$cp_hero_file = file_exists( $img_dir . 'cp-hero.png' ) ? 'cp-hero.png' : 'cp-pedido.png';
+					$cp_shot( $cp_hero_file, '', $cp_hero_key );
+					?>
 				</div>
 			</div>
 		</div>
@@ -190,7 +200,7 @@ $cp_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
 							<li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Estado activo / inactivo y papelera de eliminados</li>
 						</ul>
 					</div>
-					<div class="cp-row-media"><?php $cp_shot( 'cp-proveedores.png', '' ); ?></div>
+					<div class="cp-row-media"><?php $cp_shot( 'cp-proveedores.png', '', 'cp_img_proveedores' ); ?></div>
 				</div>
 
 				<div class="cp-row reverse">
@@ -203,7 +213,7 @@ $cp_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
 							<li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Descuento y periodo de pago predefinidos</li>
 						</ul>
 					</div>
-					<div class="cp-row-media"><?php $cp_shot( 'cp-proveedor.png', '' ); ?></div>
+					<div class="cp-row-media"><?php $cp_shot( 'cp-proveedor.png', '', 'cp_img_proveedor' ); ?></div>
 				</div>
 			</div>
 		</div>
@@ -229,7 +239,7 @@ $cp_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
 							<li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Totales al instante: pagado, pendiente y vencido</li>
 						</ul>
 					</div>
-					<div class="cp-row-media"><?php $cp_shot( 'cp-pedidos.png', '' ); ?></div>
+					<div class="cp-row-media"><?php $cp_shot( 'cp-pedidos.png', '', 'cp_img_pedidos' ); ?></div>
 				</div>
 
 				<div class="cp-row reverse">
@@ -242,7 +252,7 @@ $cp_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
 							<li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Al confirmar, actualiza el inventario y el costo</li>
 						</ul>
 					</div>
-					<div class="cp-row-media"><?php $cp_shot( 'cp-pedido.png', '' ); ?></div>
+					<div class="cp-row-media"><?php $cp_shot( 'cp-pedido.png', '', 'cp_img_pedido' ); ?></div>
 				</div>
 			</div>
 		</div>

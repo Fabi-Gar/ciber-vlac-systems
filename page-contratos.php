@@ -30,14 +30,20 @@ $img_dir = get_template_directory() . '/assets/img/';
 $vid_url = get_template_directory_uri() . '/assets/video';
 $vid_dir = get_template_directory() . '/assets/video/';
 
-// Renderiza una captura enmarcada (o un marcador si el archivo no existe).
-$con_shot = function ( $file, $caption ) use ( $img, $img_dir ) {
+// Renderiza una captura enmarcada. Prioridad de la imagen:
+//   1) La elegida en el Personalizador (Biblioteca de medios de WordPress).
+//   2) El archivo en /assets/img/.
+//   3) Un marcador con las instrucciones.
+$con_shot = function ( $file, $caption, $opt_key = '' ) use ( $img, $img_dir ) {
+	$url    = $opt_key ? vlac_opt( $opt_key ) : '';
 	$exists = file_exists( $img_dir . $file );
 	echo '<figure class="con-shot"><div class="con-frame"><div class="bar"><i></i><i></i><i></i></div>';
-	if ( $exists ) {
+	if ( $url ) {
+		printf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $url ), esc_attr( $caption ) );
+	} elseif ( $exists ) {
 		printf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $img . '/' . $file ), esc_attr( $caption ) );
 	} else {
-		printf( '<div class="con-ph con-ph-img">Coloca la imagen<br><code>assets/img/%s</code></div>', esc_html( $file ) );
+		printf( '<div class="con-ph con-ph-img">Elige la imagen en <b>Personalizar → Página Gestión de Contratos</b><br>o sube <code>assets/img/%s</code></div>', esc_html( $file ) );
 	}
 	echo '</div>';
 	if ( $caption ) {
@@ -151,7 +157,11 @@ $con_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
 				</div>
 
 				<div class="con-visual">
-					<?php $con_shot( file_exists( $img_dir . 'con-hero.png' ) ? 'con-hero.png' : 'con-listado.png', '' ); ?>
+					<?php
+					$con_hero_key  = vlac_opt( 'con_img_hero' ) ? 'con_img_hero' : 'con_img_listado';
+					$con_hero_file = file_exists( $img_dir . 'con-hero.png' ) ? 'con-hero.png' : 'con-listado.png';
+					$con_shot( $con_hero_file, '', $con_hero_key );
+					?>
 				</div>
 			</div>
 		</div>
@@ -173,7 +183,7 @@ $con_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
 						<h3>Listado de contratos</h3>
 						<p>Todos tus contratos con su estado (al día, vencido, cotización), cuota, pagado, pendiente y total. Filtra por nombre, cliente, status y rango de facturación.</p>
 					</div>
-					<div class="con-row-media"><?php $con_shot( 'con-listado.png', '' ); ?></div>
+					<div class="con-row-media"><?php $con_shot( 'con-listado.png', '', 'con_img_listado' ); ?></div>
 				</div>
 
 				<div class="con-row reverse">
@@ -182,7 +192,7 @@ $con_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
 						<h3>Vista del contrato</h3>
 						<p>Cliente, valor de cuota, recargo, impuesto, comisión, notas y totales; más sus cuotas en abierto, finalizadas, pagos y ventas asociadas.</p>
 					</div>
-					<div class="con-row-media"><?php $con_shot( 'con-vista.png', '' ); ?></div>
+					<div class="con-row-media"><?php $con_shot( 'con-vista.png', '', 'con_img_vista' ); ?></div>
 				</div>
 
 				<div class="con-row">
@@ -191,7 +201,7 @@ $con_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
 						<h3>Crear un contrato</h3>
 						<p>Define nombre, primer vencimiento, cantidad de cuotas y valor, aplica recargos, impuestos y comisión, e indica quién la recibe.</p>
 					</div>
-					<div class="con-row-media"><?php $con_shot( 'con-crear.png', '' ); ?></div>
+					<div class="con-row-media"><?php $con_shot( 'con-crear.png', '', 'con_img_crear' ); ?></div>
 				</div>
 
 				<div class="con-row reverse">
@@ -200,7 +210,7 @@ $con_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
 						<h3>Cuadre mensual</h3>
 						<p>Resumen del mes en un vistazo: total, pagado, al día y vencido, con el detalle contrato por contrato.</p>
 					</div>
-					<div class="con-row-media"><?php $con_shot( 'con-cuadre.png', '' ); ?></div>
+					<div class="con-row-media"><?php $con_shot( 'con-cuadre.png', '', 'con_img_cuadre' ); ?></div>
 				</div>
 			</div>
 		</div>

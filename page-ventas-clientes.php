@@ -29,14 +29,20 @@ $cli_has_webm  = file_exists( $vid_dir . 'clientes.webm' );
 $cli_has_video = $cli_has_mp4 || $cli_has_webm;
 $cli_poster    = file_exists( $img_dir . 'clientes.png' ) ? $img . '/clientes.png' : '';
 
-// Renderiza una captura enmarcada (o un marcador si el archivo no existe).
-$vc_shot = function ( $file, $caption ) use ( $img, $img_dir ) {
+// Renderiza una captura enmarcada. Prioridad de la imagen:
+//   1) La elegida en el Personalizador (Biblioteca de medios de WordPress).
+//   2) El archivo en /assets/img/.
+//   3) Un marcador con las instrucciones.
+$vc_shot = function ( $file, $caption, $opt_key = '' ) use ( $img, $img_dir ) {
+	$url    = $opt_key ? vlac_opt( $opt_key ) : '';
 	$exists = file_exists( $img_dir . $file );
 	echo '<figure class="vc-shot"><div class="vc-frame"><div class="bar"><i></i><i></i><i></i></div>';
-	if ( $exists ) {
+	if ( $url ) {
+		printf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $url ), esc_attr( $caption ) );
+	} elseif ( $exists ) {
 		printf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $img . '/' . $file ), esc_attr( $caption ) );
 	} else {
-		printf( '<div class="vc-shot-ph">Coloca la imagen<br><code>assets/img/%s</code></div>', esc_html( $file ) );
+		printf( '<div class="vc-shot-ph">Elige la imagen en <b>Personalizar → Página Ventas y Clientes</b><br>o sube <code>assets/img/%s</code></div>', esc_html( $file ) );
 	}
 	echo '</div>';
 	if ( $caption ) {
@@ -45,9 +51,12 @@ $vc_shot = function ( $file, $caption ) use ( $img, $img_dir ) {
 	echo '</figure>';
 };
 
-// Imagen de un dispositivo del hero (o marcador si el archivo no existe).
-$vc_dev = function ( $file, $ratio ) use ( $img, $img_dir ) {
-	if ( file_exists( $img_dir . $file ) ) {
+// Imagen de un dispositivo del hero. Igual prioridad: Personalizador → archivo → marcador.
+$vc_dev = function ( $file, $ratio, $opt_key = '' ) use ( $img, $img_dir ) {
+	$url = $opt_key ? vlac_opt( $opt_key ) : '';
+	if ( $url ) {
+		printf( '<img class="shot" src="%s" alt="" loading="lazy" />', esc_url( $url ) );
+	} elseif ( file_exists( $img_dir . $file ) ) {
 		printf( '<img class="shot" src="%s" alt="" loading="lazy" />', esc_url( $img . '/' . $file ) );
 	} else {
 		printf( '<div class="vc-dev-ph" style="aspect-ratio:%s;"><span>Imagen</span><code>%s</code></div>', esc_attr( $ratio ), esc_html( $file ) );
@@ -175,11 +184,11 @@ $vc_dev = function ( $file, $ratio ) use ( $img, $img_dir ) {
 
 					<div class="tablet">
 						<span class="badge">Clientes</span>
-						<div class="tscreen"><?php $vc_dev( 'vc-tablet.png', '4/3' ); ?></div>
+						<div class="tscreen"><?php $vc_dev( 'vc-tablet.png', '4/3', 'vc_img_tablet' ); ?></div>
 					</div>
 
 					<div class="phone">
-						<div class="pscreen"><?php $vc_dev( 'vc-phone.png', '9/16' ); ?></div>
+						<div class="pscreen"><?php $vc_dev( 'vc-phone.png', '9/16', 'vc_img_phone' ); ?></div>
 					</div>
 				</div>
 			</div>
@@ -202,7 +211,7 @@ $vc_dev = function ( $file, $ratio ) use ( $img, $img_dir ) {
 						<h3>Listado de clientes</h3>
 						<p>Búsqueda por código, nombre, NIT, DPI, teléfono o correo, con filtro de activos y foto de cada cliente.</p>
 					</div>
-					<div class="vc-row-media"><?php $vc_shot( 'vc-clientes.png', '' ); ?></div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-clientes.png', '', 'vc_img_clientes' ); ?></div>
 				</div>
 
 				<div class="vc-row reverse">
@@ -211,7 +220,7 @@ $vc_dev = function ( $file, $ratio ) use ( $img, $img_dir ) {
 						<h3>Ficha completa</h3>
 						<p>Nombre, alias, NIT, DPI, correo, teléfono, descuento, tipo y fecha de nacimiento. Búsqueda automática por NIT o DPI.</p>
 					</div>
-					<div class="vc-row-media"><?php $vc_shot( 'vc-ficha.png', '' ); ?></div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-ficha.png', '', 'vc_img_ficha' ); ?></div>
 				</div>
 
 				<div class="vc-row">
@@ -220,7 +229,7 @@ $vc_dev = function ( $file, $ratio ) use ( $img, $img_dir ) {
 						<h3>Direcciones y contactos</h3>
 						<p>Registra múltiples direcciones y contactos por cliente, más su historial de órdenes y límite de crédito.</p>
 					</div>
-					<div class="vc-row-media"><?php $vc_shot( 'vc-direcciones.png', '' ); ?></div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-direcciones.png', '', 'vc_img_direcciones' ); ?></div>
 				</div>
 			</div>
 		</div>
@@ -241,7 +250,7 @@ $vc_dev = function ( $file, $ratio ) use ( $img, $img_dir ) {
 						<h3>Órdenes con estados y utilidad</h3>
 						<p>Total bruto y utilidad en tiempo real —con costos, gastos, propina y nómina—. Cada orden con su estado (pagada, preparada, entregada) por mesa, domicilio o mostrador.</p>
 					</div>
-					<div class="vc-row-media"><?php $vc_shot( 'vc-ordenes.png', '' ); ?></div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-ordenes.png', '', 'vc_img_ordenes' ); ?></div>
 				</div>
 
 				<div class="vc-row reverse">
@@ -250,7 +259,7 @@ $vc_dev = function ( $file, $ratio ) use ( $img, $img_dir ) {
 						<h3>Historial de cajas</h3>
 						<p>Apertura y cierre de cada caja: efectivo de apertura y cierre, cajero responsable y totales por período.</p>
 					</div>
-					<div class="vc-row-media"><?php $vc_shot( 'vc-cajas.png', '' ); ?></div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-cajas.png', '', 'vc_img_cajas' ); ?></div>
 				</div>
 
 				<div class="vc-row">
@@ -259,7 +268,7 @@ $vc_dev = function ( $file, $ratio ) use ( $img, $img_dir ) {
 						<h3>Productos vendidos</h3>
 						<p>El detalle de todo lo vendido: fecha, orden, producto, cantidad, vendedor, lista de precio, costo y precio.</p>
 					</div>
-					<div class="vc-row-media"><?php $vc_shot( 'vc-productos.png', '' ); ?></div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-productos.png', '', 'vc_img_productos' ); ?></div>
 				</div>
 
 				<div class="vc-row reverse">
@@ -268,7 +277,7 @@ $vc_dev = function ( $file, $ratio ) use ( $img, $img_dir ) {
 						<h3>Reportes de venta</h3>
 						<p>Ventas por vendedor y distribución por tipo de pago en gráficas claras, para tomar decisiones rápido.</p>
 					</div>
-					<div class="vc-row-media"><?php $vc_shot( 'vc-reportes.png', '' ); ?></div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-reportes.png', '', 'vc_img_reportes' ); ?></div>
 				</div>
 			</div>
 		</div>

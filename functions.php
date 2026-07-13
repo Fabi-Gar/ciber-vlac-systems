@@ -290,6 +290,19 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_fields( $wp_customize, $vc_fields, 'vlac_vc' );
 
+	$vc_images = array(
+		'vc_img_tablet'      => __( 'Hero · Tablet', 'vlac-systems' ),
+		'vc_img_phone'       => __( 'Hero · Teléfono', 'vlac-systems' ),
+		'vc_img_clientes'    => __( 'Listado de clientes', 'vlac-systems' ),
+		'vc_img_ficha'       => __( 'Ficha del cliente', 'vlac-systems' ),
+		'vc_img_direcciones' => __( 'Direcciones y contactos', 'vlac-systems' ),
+		'vc_img_ordenes'     => __( 'Órdenes', 'vlac-systems' ),
+		'vc_img_cajas'       => __( 'Historial de cajas', 'vlac-systems' ),
+		'vc_img_productos'   => __( 'Productos vendidos', 'vlac-systems' ),
+		'vc_img_reportes'    => __( 'Reportes de venta', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $vc_images, 'vlac_vc' );
+
 	/* ---------- Página Gestión de Contratos ---------- */
 	$wp_customize->add_section(
 		'vlac_con',
@@ -307,6 +320,15 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_fields( $wp_customize, $con_fields, 'vlac_con' );
 
+	$con_images = array(
+		'con_img_hero'    => __( 'Hero · Imagen destacada (opcional)', 'vlac-systems' ),
+		'con_img_listado' => __( 'Listado de contratos', 'vlac-systems' ),
+		'con_img_vista'   => __( 'Vista del contrato', 'vlac-systems' ),
+		'con_img_crear'   => __( 'Crear un contrato', 'vlac-systems' ),
+		'con_img_cuadre'  => __( 'Cuadre mensual', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $con_images, 'vlac_con' );
+
 	/* ---------- Página Compras y Proveedores ---------- */
 	$wp_customize->add_section(
 		'vlac_cp',
@@ -323,6 +345,48 @@ function vlac_customize_register( $wp_customize ) {
 		'cp_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Centraliza tus proveedores, controla cada pedido y no vuelvas a perder de vista un pago.', 'textarea' ),
 	);
 	vlac_add_fields( $wp_customize, $cp_fields, 'vlac_cp' );
+
+	$cp_images = array(
+		'cp_img_hero'        => __( 'Hero · Imagen destacada (opcional)', 'vlac-systems' ),
+		'cp_img_proveedores' => __( 'Listado de proveedores', 'vlac-systems' ),
+		'cp_img_proveedor'   => __( 'Ficha del proveedor', 'vlac-systems' ),
+		'cp_img_pedidos'     => __( 'Panel de pedidos', 'vlac-systems' ),
+		'cp_img_pedido'      => __( 'Crear un pedido', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $cp_images, 'vlac_cp' );
+
+	/* ---------- Página Inventario y Productos ---------- */
+	$wp_customize->add_section(
+		'vlac_inv',
+		array(
+			'title' => __( 'Página Inventario y Productos', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$inv_fields = array(
+		'inv_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Inventario y Productos', 'text' ),
+		'inv_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'Un solo <span class="accent">panel</span> para todo tu <span class="accent">inventario</span>', 'html' ),
+		'inv_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Conteos, existencias, movimientos y traslados entre bodegas, más un catálogo de productos completo con costos, precios e historial de inventario.', 'textarea' ),
+		'inv_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Toma el control de tu inventario hoy', 'text' ),
+		'inv_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Cuenta, valoriza, mueve y controla tu stock desde un solo panel conectado a tus ventas y compras.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $inv_fields, 'vlac_inv' );
+
+	// Capturas de pantalla (selector de medios de WordPress). Si se elige una
+	// imagen aquí, tiene prioridad sobre el archivo de /assets/img/.
+	$inv_images = array(
+		'inv_img_hero'         => __( 'Hero · Imagen destacada (opcional)', 'vlac-systems' ),
+		'inv_img_panel'        => __( 'Panel de inventario', 'vlac-systems' ),
+		'inv_img_conteo'       => __( 'Conteo de inventario', 'vlac-systems' ),
+		'inv_img_conteo_print' => __( 'Impresión del conteo (térmica / PDF)', 'vlac-systems' ),
+		'inv_img_existencias'  => __( 'Situación de inventario (existencias)', 'vlac-systems' ),
+		'inv_img_movimientos'  => __( 'Registro de movimientos', 'vlac-systems' ),
+		'inv_img_traslados'    => __( 'Traslados', 'vlac-systems' ),
+		'inv_img_gestion'      => __( 'Gestión de traslados', 'vlac-systems' ),
+		'inv_img_productos'    => __( 'Listado de productos', 'vlac-systems' ),
+		'inv_img_producto'     => __( 'Ficha del producto', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $inv_images, 'vlac_inv' );
 
 	/* ---------- Barra superior / botones del header ---------- */
 	$wp_customize->add_section(
@@ -416,6 +480,32 @@ function vlac_customize_register( $wp_customize ) {
 	vlac_add_fields( $wp_customize, $footer_fields, 'vlac_footer' );
 }
 add_action( 'customize_register', 'vlac_customize_register' );
+
+/**
+ * Helper para registrar selectores de imagen (Biblioteca de medios de WordPress)
+ * de forma compacta. Cada ajuste guarda la URL de la imagen elegida.
+ */
+function vlac_add_image_fields( $wp_customize, $images, $section ) {
+	foreach ( $images as $id => $label ) {
+		$wp_customize->add_setting(
+			$id,
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Image_Control(
+				$wp_customize,
+				$id,
+				array(
+					'label'   => $label,
+					'section' => $section,
+				)
+			)
+		);
+	}
+}
 
 /**
  * Helper para registrar múltiples campos de texto/HTML de forma compacta.
