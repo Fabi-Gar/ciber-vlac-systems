@@ -44,6 +44,15 @@ $vc_shot = function ( $file, $caption ) use ( $img, $img_dir ) {
 	}
 	echo '</figure>';
 };
+
+// Imagen de un dispositivo del hero (o marcador si el archivo no existe).
+$vc_dev = function ( $file, $ratio ) use ( $img, $img_dir ) {
+	if ( file_exists( $img_dir . $file ) ) {
+		printf( '<img class="shot" src="%s" alt="" loading="lazy" />', esc_url( $img . '/' . $file ) );
+	} else {
+		printf( '<div class="vc-dev-ph" style="aspect-ratio:%s;"><span>Imagen</span><code>%s</code></div>', esc_attr( $ratio ), esc_html( $file ) );
+	}
+};
 ?>
 
 <style>
@@ -53,12 +62,21 @@ $vc_shot = function ( $file, $caption ) use ( $img, $img_dir ) {
 	/* HERO */
 	#vc-page .vc-hero{position:relative;overflow:hidden;}
 	#vc-page .vc-hero::before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(700px 380px at 82% 8%,rgba(193,39,45,.07),transparent 60%),linear-gradient(180deg,#fff,var(--bg-alt));}
-	#vc-page .vc-hero .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.12fr;gap:48px;align-items:center;padding:66px 0 84px;}
+	#vc-page .vc-hero .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.02fr 1.15fr;gap:50px;align-items:center;padding:66px 0 88px;}
 	#vc-page .vc-hero h1{font-size:clamp(32px,4.4vw,50px);font-weight:800;}
 	#vc-page .vc-hero .lead{color:var(--muted);font-size:18px;margin:20px 0 8px;max-width:520px;}
 	#vc-page .vc-hero .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;}
 	#vc-page .vc-hero .hero-note{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);margin-top:22px;}
 	#vc-page .vc-hero .hero-note svg{width:16px;height:16px;color:var(--vc-green);}
+
+	/* Montaje de dispositivos del hero (video + 2 imágenes) */
+	#vc-page .vc-montage .screen video.shot{width:100%;height:auto;display:block;background:#000;}
+	#vc-page .vc-montage .vc-mon-ph{aspect-ratio:16/10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--bg-alt);color:var(--muted);text-align:center;padding:20px;font-size:13px;}
+	#vc-page .vc-montage .vc-mon-ph svg{width:38px;height:38px;color:#c9c9d0;}
+	#vc-page .vc-montage .vc-mon-ph b{font-family:'Manrope';font-weight:700;color:var(--ink-strong);font-size:14px;}
+	#vc-page .vc-montage .vc-mon-ph code{font-size:12px;color:var(--red-dark);background:var(--red-soft);padding:3px 8px;border-radius:5px;}
+	#vc-page .vc-montage .vc-dev-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#eef0f3;color:var(--muted);text-align:center;padding:12px;font-size:11px;}
+	#vc-page .vc-montage .vc-dev-ph code{font-size:9.5px;color:var(--red-dark);background:var(--red-soft);padding:2px 6px;border-radius:5px;word-break:break-all;}
 
 	/* MARCO DE PANTALLA (estilo navegador) */
 	#vc-page .vc-frame{background:#fff;border:1px solid #d9d9de;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg);}
@@ -81,6 +99,16 @@ $vc_shot = function ( $file, $caption ) use ( $img, $img_dir ) {
 	#vc-page .vc-step h3{font-size:17px;font-weight:700;margin-bottom:8px;}
 	#vc-page .vc-step p{color:var(--muted);font-size:14.5px;}
 
+	/* FILAS ALTERNADAS (texto + imagen juntos) */
+	#vc-page .vc-rows{display:flex;flex-direction:column;gap:60px;}
+	#vc-page .vc-row{display:grid;grid-template-columns:1fr 1.15fr;gap:46px;align-items:center;}
+	#vc-page .vc-row.reverse .vc-row-text{order:2;}
+	#vc-page .vc-row.reverse .vc-row-media{order:1;}
+	#vc-page .vc-row-text .vc-ic{width:52px;height:52px;border-radius:13px;background:var(--red-soft);display:grid;place-items:center;margin-bottom:18px;}
+	#vc-page .vc-row-text .vc-ic svg{width:26px;height:26px;color:var(--red);}
+	#vc-page .vc-row-text h3{font-size:clamp(20px,2.4vw,26px);font-weight:800;}
+	#vc-page .vc-row-text p{color:var(--muted);font-size:16.5px;margin-top:14px;max-width:420px;}
+
 	/* SHOWCASE DE CAPTURAS */
 	#vc-page .vc-shots{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;}
 	#vc-page .vc-shot{margin:0;}
@@ -93,6 +121,9 @@ $vc_shot = function ( $file, $caption ) use ( $img, $img_dir ) {
 		#vc-page .vc-hero .hero-grid{grid-template-columns:1fr;gap:34px;padding:52px 0 56px;}
 		#vc-page .vc-steps{grid-template-columns:1fr;}
 		#vc-page .vc-shots{grid-template-columns:1fr;}
+		#vc-page .vc-row{grid-template-columns:1fr;gap:22px;}
+		#vc-page .vc-row.reverse .vc-row-text{order:0;}
+		#vc-page .vc-row.reverse .vc-row-media{order:0;}
 	}
 </style>
 
@@ -116,26 +147,40 @@ $vc_shot = function ( $file, $caption ) use ( $img, $img_dir ) {
 					</div>
 				</div>
 
-				<!-- Video del flujo de clientes (o marcador) -->
-				<div class="vc-frame">
-					<div class="bar"><i></i><i></i><i></i><span class="url">app.tunegocio.com.gt/clientes</span></div>
-					<?php if ( $cli_has_video ) : ?>
-						<video autoplay muted loop playsinline preload="metadata"<?php echo $cli_poster ? ' poster="' . esc_url( $cli_poster ) . '"' : ''; ?>>
-							<?php if ( $cli_has_webm ) : ?>
-								<source src="<?php echo esc_url( $vid_url . '/clientes.webm' ); ?>" type="video/webm" />
+				<!-- Montaje de dispositivos: video (monitor) + 2 imágenes (tablet y teléfono) -->
+				<div class="montage vc-montage" aria-label="Vlac Systems: clientes y ventas">
+					<div class="monitor">
+						<div class="screen">
+							<div class="browserbar"><i></i><i></i><i></i><span class="url">app.tunegocio.com.gt/clientes</span></div>
+							<?php if ( $cli_has_video ) : ?>
+								<video class="shot" autoplay muted loop playsinline preload="metadata"<?php echo $cli_poster ? ' poster="' . esc_url( $cli_poster ) . '"' : ''; ?>>
+									<?php if ( $cli_has_webm ) : ?>
+										<source src="<?php echo esc_url( $vid_url . '/clientes.webm' ); ?>" type="video/webm" />
+									<?php endif; ?>
+									<?php if ( $cli_has_mp4 ) : ?>
+										<source src="<?php echo esc_url( $vid_url . '/clientes.mp4' ); ?>" type="video/mp4" />
+									<?php endif; ?>
+								</video>
+							<?php else : ?>
+								<div class="vc-mon-ph">
+									<svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4zM10 9l6 3-6 3V9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+									<b>Video del flujo de clientes</b>
+									<code>assets/video/clientes.mp4</code>
+								</div>
 							<?php endif; ?>
-							<?php if ( $cli_has_mp4 ) : ?>
-								<source src="<?php echo esc_url( $vid_url . '/clientes.mp4' ); ?>" type="video/mp4" />
-							<?php endif; ?>
-						</video>
-					<?php else : ?>
-						<div class="vc-ph">
-							<svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4zM10 9l6 3-6 3V9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-							<b>Aquí irá el video del flujo de clientes</b>
-							<span>Listado → ficha → direcciones y contactos</span>
-							<code>assets/video/clientes.mp4</code>
 						</div>
-					<?php endif; ?>
+						<div class="stand-neck"></div>
+						<div class="stand"></div>
+					</div>
+
+					<div class="tablet">
+						<span class="badge">Clientes</span>
+						<div class="tscreen"><?php $vc_dev( 'vc-tablet.png', '4/3' ); ?></div>
+					</div>
+
+					<div class="phone">
+						<div class="pscreen"><?php $vc_dev( 'vc-phone.png', '9/16' ); ?></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -150,29 +195,33 @@ $vc_shot = function ( $file, $caption ) use ( $img, $img_dir ) {
 				<p>Desde el listado hasta la ficha detallada con sus direcciones y contactos.</p>
 			</div>
 
-			<div class="vc-steps">
-				<div class="vc-step">
-					<div class="vc-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-					<h3>Listado de clientes</h3>
-					<p>Búsqueda por código, nombre, NIT, DPI, teléfono o correo, con filtro de activos y foto de cada cliente.</p>
+			<div class="vc-rows">
+				<div class="vc-row">
+					<div class="vc-row-text">
+						<div class="vc-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+						<h3>Listado de clientes</h3>
+						<p>Búsqueda por código, nombre, NIT, DPI, teléfono o correo, con filtro de activos y foto de cada cliente.</p>
+					</div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-clientes.png', '' ); ?></div>
 				</div>
-				<div class="vc-step">
-					<div class="vc-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
-					<h3>Ficha completa</h3>
-					<p>Nombre, alias, NIT, DPI, correo, teléfono, descuento, tipo y fecha de nacimiento. Búsqueda automática por NIT o DPI.</p>
-				</div>
-				<div class="vc-step">
-					<div class="vc-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.7"/></svg></div>
-					<h3>Direcciones y contactos</h3>
-					<p>Registra múltiples direcciones y contactos por cliente, más su historial de órdenes y límite de crédito.</p>
-				</div>
-			</div>
 
-			<div class="vc-shots" style="margin-top:34px;">
-				<?php $vc_shot( 'vc-clientes.png', 'Listado de clientes' ); ?>
-				<?php $vc_shot( 'vc-ficha.png', 'Ficha del cliente' ); ?>
-				<?php $vc_shot( 'vc-direcciones.png', 'Direcciones y contactos' ); ?>
-				<?php $vc_shot( 'vc-contactos.png', 'Historial y límite de crédito' ); ?>
+				<div class="vc-row reverse">
+					<div class="vc-row-text">
+						<div class="vc-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+						<h3>Ficha completa</h3>
+						<p>Nombre, alias, NIT, DPI, correo, teléfono, descuento, tipo y fecha de nacimiento. Búsqueda automática por NIT o DPI.</p>
+					</div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-ficha.png', '' ); ?></div>
+				</div>
+
+				<div class="vc-row">
+					<div class="vc-row-text">
+						<div class="vc-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.7"/></svg></div>
+						<h3>Direcciones y contactos</h3>
+						<p>Registra múltiples direcciones y contactos por cliente, más su historial de órdenes y límite de crédito.</p>
+					</div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-direcciones.png', '' ); ?></div>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -185,43 +234,41 @@ $vc_shot = function ( $file, $caption ) use ( $img, $img_dir ) {
 				<h2>De la orden al reporte, todo conectado</h2>
 			</div>
 
-			<div class="vc-shots" style="margin-bottom:44px;">
-				<?php $vc_shot( 'vc-ordenes.png', 'Órdenes con estados y utilidad' ); ?>
-				<?php $vc_shot( 'vc-cajas.png', 'Historial de cajas' ); ?>
-				<?php $vc_shot( 'vc-productos.png', 'Productos vendidos' ); ?>
-				<?php $vc_shot( 'vc-reportes.png', 'Reportes por vendedor y tipo de pago' ); ?>
-			</div>
+			<div class="vc-rows">
+				<div class="vc-row">
+					<div class="vc-row-text">
+						<div class="vc-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16l-1 12H5L4 7zM8 7V5a4 4 0 018 0v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+						<h3>Órdenes con estados y utilidad</h3>
+						<p>Total bruto y utilidad en tiempo real —con costos, gastos, propina y nómina—. Cada orden con su estado (pagada, preparada, entregada) por mesa, domicilio o mostrador.</p>
+					</div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-ordenes.png', '' ); ?></div>
+				</div>
 
-			<div class="feat-grid">
-				<div class="feat">
-					<div class="feat-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16l-1 12H5L4 7zM8 7V5a4 4 0 018 0v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-					<h3>Órdenes con estados</h3>
-					<p>Pagada, preparada, entregada… por mesa, domicilio o mostrador.</p>
+				<div class="vc-row reverse">
+					<div class="vc-row-text">
+						<div class="vc-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M3 10h18M7 15h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+						<h3>Historial de cajas</h3>
+						<p>Apertura y cierre de cada caja: efectivo de apertura y cierre, cajero responsable y totales por período.</p>
+					</div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-cajas.png', '' ); ?></div>
 				</div>
-				<div class="feat">
-					<div class="feat-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M3 10h18M7 15h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
-					<h3>Historial de cajas</h3>
-					<p>Apertura y cierre, efectivo, cajero y totales por caja.</p>
+
+				<div class="vc-row">
+					<div class="vc-row-text">
+						<div class="vc-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h9l3 3v15H6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8h6M9 12h6M9 16h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+						<h3>Productos vendidos</h3>
+						<p>El detalle de todo lo vendido: fecha, orden, producto, cantidad, vendedor, lista de precio, costo y precio.</p>
+					</div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-productos.png', '' ); ?></div>
 				</div>
-				<div class="feat">
-					<div class="feat-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h9l3 3v15H6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8h6M9 12h6M9 16h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
-					<h3>Productos vendidos</h3>
-					<p>Detalle por vendedor, orden, lista de precio, costo y precio.</p>
-				</div>
-				<div class="feat">
-					<div class="feat-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-					<h3>Reportes de venta</h3>
-					<p>Ventas por vendedor y distribución por tipo de pago.</p>
-				</div>
-				<div class="feat">
-					<div class="feat-ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v10M9.5 9.5a2.5 2.5 0 015 0c0 2-2.5 1.5-2.5 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-					<h3>Utilidad en tiempo real</h3>
-					<p>Total bruto, costos, gastos, propina y nómina de un vistazo.</p>
-				</div>
-				<div class="feat">
-					<div class="feat-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg></div>
-					<h3>Domicilios y mesas</h3>
-					<p>Controla entregas a domicilio y el estado de cada mesa.</p>
+
+				<div class="vc-row reverse">
+					<div class="vc-row-text">
+						<div class="vc-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+						<h3>Reportes de venta</h3>
+						<p>Ventas por vendedor y distribución por tipo de pago en gráficas claras, para tomar decisiones rápido.</p>
+					</div>
+					<div class="vc-row-media"><?php $vc_shot( 'vc-reportes.png', '' ); ?></div>
 				</div>
 			</div>
 		</div>

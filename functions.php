@@ -290,6 +290,23 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_fields( $wp_customize, $vc_fields, 'vlac_vc' );
 
+	/* ---------- Página Gestión de Contratos ---------- */
+	$wp_customize->add_section(
+		'vlac_con',
+		array(
+			'title' => __( 'Página Gestión de Contratos', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$con_fields = array(
+		'con_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Gestión de Contratos', 'text' ),
+		'con_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'Controla tus <span class="accent">contratos</span> y cuotas sin perder el hilo', 'html' ),
+		'con_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Crea planes de pago, registra cuotas y pagos, y consulta el estado de cada contrato: al día, vencido o pagado.', 'textarea' ),
+		'con_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Ordena tus cobros por cuotas hoy', 'text' ),
+		'con_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Crea contratos, controla sus cuotas y no vuelvas a perder de vista un pago.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $con_fields, 'vlac_con' );
+
 	/* ---------- Barra superior / botones del header ---------- */
 	$wp_customize->add_section(
 		'vlac_header',
