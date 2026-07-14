@@ -503,6 +503,37 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_image_fields( $wp_customize, $ms_images, 'vlac_ms' );
 
+	/* ---------- Página Informes ---------- */
+	$wp_customize->add_section(
+		'vlac_inf',
+		array(
+			'title' => __( 'Página Informes', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$inf_fields = array(
+		'inf_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Informes', 'text' ),
+		'inf_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'Un <span class="accent">informe</span> para cada pregunta de tu negocio', 'html' ),
+		'inf_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Ventas, inventario, finanzas, productos, clientes, caja y nómina. Elige el período, las columnas que quieres ver e imprime en PDF.', 'textarea' ),
+		'inf_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Deja de adivinar: mira los números', 'text' ),
+		'inf_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Genera el informe que necesites, con el período y las columnas que quieras, en segundos.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $inf_fields, 'vlac_inf' );
+
+	$inf_images = array(
+		'inf_img_columnas'      => __( 'Período y columnas seleccionables', 'vlac-systems' ),
+		'inf_img_pdf_ordenes'   => __( 'PDF · Órdenes', 'vlac-systems' ),
+		'inf_img_pdf_inventario' => __( 'PDF · Situación de inventario', 'vlac-systems' ),
+		'inf_img_pdf_caja'      => __( 'PDF · Utilidad de caja general', 'vlac-systems' ),
+		'inf_img_pdf_historial' => __( 'PDF · Historial de inventario', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $inf_images, 'vlac_inf' );
+
+	$inf_videos = array(
+		'inf_video_panel' => __( 'Video · Panel de informes', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $inf_videos, 'vlac_inf' );
+
 	/* ---------- Barra superior / botones del header ---------- */
 	$wp_customize->add_section(
 		'vlac_header',

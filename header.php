@@ -71,7 +71,7 @@
 							<div class="mega-col">
 								<h5>Finanzas e informes</h5>
 								<a href="<?php echo esc_url( home_url( '/financiera/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Gestión financiera</a>
-								<a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Informes</a>
+								<a href="<?php echo esc_url( home_url( '/informes/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Informes</a>
 							</div>
 							<div class="mega-col">
 								<h5>Administración</h5>
@@ -144,7 +144,7 @@
 		<h6>Compras e inventario</h6>
 		<a href="<?php echo esc_url( home_url( '/compras-proveedores/' ) ); ?>">Gestión de compras y proveedores</a><a href="<?php echo esc_url( home_url( '/inventario/' ) ); ?>">Gestión de inventario y productos</a>
 		<h6>Finanzas e informes</h6>
-		<a href="<?php echo esc_url( home_url( '/financiera/' ) ); ?>">Gestión financiera</a><a href="#">Informes</a>
+		<a href="<?php echo esc_url( home_url( '/financiera/' ) ); ?>">Gestión financiera</a><a href="<?php echo esc_url( home_url( '/informes/' ) ); ?>">Informes</a>
 		<h6>Administración</h6>
 		<a href="<?php echo esc_url( home_url( '/usuarios/' ) ); ?>">Gestión de usuarios</a><a href="<?php echo esc_url( home_url( '/sucursales/' ) ); ?>">Múltiples sucursales</a>
 	</div>
