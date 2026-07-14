@@ -303,6 +303,11 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_image_fields( $wp_customize, $vc_images, 'vlac_vc' );
 
+	$vc_videos = array(
+		'vc_video_clientes' => __( 'Video · Flujo de clientes (hero)', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $vc_videos, 'vlac_vc' );
+
 	/* ---------- Página Gestión de Contratos ---------- */
 	$wp_customize->add_section(
 		'vlac_con',
@@ -329,6 +334,12 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_image_fields( $wp_customize, $con_images, 'vlac_con' );
 
+	$con_videos = array(
+		'con_video_pago'   => __( 'Video · Pagar un contrato', 'vlac-systems' ),
+		'con_video_cuotas' => __( 'Video · Ver cuotas', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $con_videos, 'vlac_con' );
+
 	/* ---------- Página Compras y Proveedores ---------- */
 	$wp_customize->add_section(
 		'vlac_cp',
@@ -354,6 +365,11 @@ function vlac_customize_register( $wp_customize ) {
 		'cp_img_pedido'      => __( 'Crear un pedido', 'vlac-systems' ),
 	);
 	vlac_add_image_fields( $wp_customize, $cp_images, 'vlac_cp' );
+
+	$cp_videos = array(
+		'cp_video_pedido' => __( 'Video · Crear un pedido a proveedor', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $cp_videos, 'vlac_cp' );
 
 	/* ---------- Página Inventario y Productos ---------- */
 	$wp_customize->add_section(
@@ -387,6 +403,105 @@ function vlac_customize_register( $wp_customize ) {
 		'inv_img_producto'     => __( 'Ficha del producto', 'vlac-systems' ),
 	);
 	vlac_add_image_fields( $wp_customize, $inv_images, 'vlac_inv' );
+
+	$inv_videos = array(
+		'inv_video_conteo' => __( 'Video · Conteo de inventario', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $inv_videos, 'vlac_inv' );
+
+	/* ---------- Página Gestión Financiera ---------- */
+	$wp_customize->add_section(
+		'vlac_fin',
+		array(
+			'title' => __( 'Página Gestión Financiera', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$fin_fields = array(
+		'fin_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Gestión Financiera', 'text' ),
+		'fin_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'Toda tu <span class="accent">operación financiera</span> bajo control', 'html' ),
+		'fin_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Caja general, comisiones, crédito de clientes, facturas, gastos y ventas por vendedor: el dinero de tu negocio, ordenado en un solo lugar.', 'textarea' ),
+		'fin_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Ordena las finanzas de tu negocio hoy', 'text' ),
+		'fin_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Controla tu caja, tus comisiones, tu crédito y tus gastos desde un solo lugar conectado a tus ventas.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $fin_fields, 'vlac_fin' );
+
+	$fin_images = array(
+		'fin_img_hero'          => __( 'Hero · Imagen destacada (opcional)', 'vlac-systems' ),
+		'fin_img_caja'          => __( 'Caja general / transacciones', 'vlac-systems' ),
+		'fin_img_cuenta'        => __( 'Vista por cuenta bancaria', 'vlac-systems' ),
+		'fin_img_cuadre'        => __( 'Cuadre por sucursales', 'vlac-systems' ),
+		'fin_img_com_generar'   => __( 'Generador de comisiones', 'vlac-systems' ),
+		'fin_img_com_gestion'   => __( 'Pagar / gestión de comisiones', 'vlac-systems' ),
+		'fin_img_credito'       => __( 'Crédito de clientes — listado', 'vlac-systems' ),
+		'fin_img_credito_ficha' => __( 'Crédito de clientes — ficha', 'vlac-systems' ),
+		'fin_img_facturas'      => __( 'Control de facturas', 'vlac-systems' ),
+		'fin_img_gastos'        => __( 'Control de gastos', 'vlac-systems' ),
+		'fin_img_ventas'        => __( 'Ventas por vendedor', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $fin_images, 'vlac_fin' );
+
+	$fin_videos = array(
+		'fin_video_caja' => __( 'Video · Movimiento de caja', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $fin_videos, 'vlac_fin' );
+
+	/* ---------- Página Gestión de Usuarios ---------- */
+	$wp_customize->add_section(
+		'vlac_usr',
+		array(
+			'title' => __( 'Página Gestión de Usuarios', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$usr_fields = array(
+		'usr_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Gestión de Usuarios', 'text' ),
+		'usr_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'Cada persona con su <span class="accent">rol</span> y sus <span class="accent">permisos</span>', 'html' ),
+		'usr_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Crea usuarios, asígnales roles por sucursal, y habilita, deshabilita o elimina accesos cuando lo necesites. Tu equipo, bajo control.', 'textarea' ),
+		'usr_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Ordena los accesos de tu equipo hoy', 'text' ),
+		'usr_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Define quién entra, a qué sucursal y con qué permisos, desde un solo lugar.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $usr_fields, 'vlac_usr' );
+
+	$usr_images = array(
+		'usr_img_hero'         => __( 'Hero · Imagen destacada (opcional)', 'vlac-systems' ),
+		'usr_img_listado'      => __( 'Listado de usuarios con sus roles', 'vlac-systems' ),
+		'usr_img_ficha'        => __( 'Ficha y permisos por sucursal', 'vlac-systems' ),
+		'usr_img_crear'        => __( 'Crear un usuario', 'vlac-systems' ),
+		'usr_img_deshabilitar' => __( 'Confirmación de deshabilitar', 'vlac-systems' ),
+		'usr_img_eliminar'     => __( 'Confirmación de eliminación', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $usr_images, 'vlac_usr' );
+
+	/* ---------- Página Múltiples Sucursales ---------- */
+	$wp_customize->add_section(
+		'vlac_ms',
+		array(
+			'title' => __( 'Página Múltiples Sucursales', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$ms_fields = array(
+		'ms_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Múltiples Sucursales', 'text' ),
+		'ms_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'Un sistema, <span class="accent">todas</span> tus sucursales', 'html' ),
+		'ms_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Cada sucursal con su propia información, existencias, ventas y equipo —y todas conectadas entre sí desde un mismo lugar.', 'textarea' ),
+		'ms_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Haz crecer tu negocio, sucursal por sucursal', 'text' ),
+		'ms_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Abre una nueva sucursal sin duplicar sistemas: mismo software, misma marca, datos separados.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $ms_fields, 'vlac_ms' );
+
+	$ms_images = array(
+		'ms_img_hero'              => __( 'Hero · Imagen destacada (opcional)', 'vlac-systems' ),
+		'ms_img_negocio'           => __( 'Información del negocio — sucursal 1', 'vlac-systems' ),
+		'ms_img_negocio_2'         => __( 'Información del negocio — sucursal 2', 'vlac-systems' ),
+		'ms_img_existencias'       => __( 'Existencias por sucursal', 'vlac-systems' ),
+		'ms_img_ventas'            => __( 'Ventas por sucursal', 'vlac-systems' ),
+		'ms_img_usuarios'          => __( 'Usuarios por sucursal', 'vlac-systems' ),
+		'ms_img_traslado_detalle'  => __( 'Traslados · 1. Detalle del traslado', 'vlac-systems' ),
+		'ms_img_traslados_salidas' => __( 'Traslados · 2. Salidas y confirmación', 'vlac-systems' ),
+		'ms_img_traslados'         => __( 'Traslados · 3. Ingresos / recepción', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $ms_images, 'vlac_ms' );
 
 	/* ---------- Barra superior / botones del header ---------- */
 	$wp_customize->add_section(
@@ -501,6 +616,34 @@ function vlac_add_image_fields( $wp_customize, $images, $section ) {
 				array(
 					'label'   => $label,
 					'section' => $section,
+				)
+			)
+		);
+	}
+}
+
+/**
+ * Helper para registrar selectores de video (Biblioteca de medios de WordPress)
+ * de forma compacta. Cada ajuste guarda el ID del archivo de video elegido, así
+ * los videos no viajan dentro del tema.
+ */
+function vlac_add_video_fields( $wp_customize, $videos, $section ) {
+	foreach ( $videos as $id => $label ) {
+		$wp_customize->add_setting(
+			$id,
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'absint',
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Media_Control(
+				$wp_customize,
+				$id,
+				array(
+					'label'     => $label,
+					'section'   => $section,
+					'mime_type' => 'video',
 				)
 			)
 		);

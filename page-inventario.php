@@ -62,12 +62,28 @@ $inv_shot = function ( $file, $caption, $opt_key = '' ) use ( $img, $img_dir ) {
 	echo '</figure>';
 };
 
-// Renderiza un video autoplay (o un marcador con el nombre esperado).
-$inv_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
+// Renderiza un video autoplay. Prioridad:
+//   1) El elegido en el Personalizador (Biblioteca de medios de WordPress).
+//   2) El archivo en /assets/video/.
+//   3) Un marcador con el nombre esperado.
+$inv_video = function ( $base, $title, $sub, $opt_key = '' ) use ( $vid_dir, $vid_url ) {
+	$wp_url  = '';
+	$wp_type = '';
+	if ( $opt_key ) {
+		$vid_id = vlac_opt( $opt_key );
+		if ( $vid_id ) {
+			$wp_url  = wp_get_attachment_url( $vid_id );
+			$wp_type = get_post_mime_type( $vid_id );
+		}
+	}
 	$has_mp4  = file_exists( $vid_dir . $base . '.mp4' );
 	$has_webm = file_exists( $vid_dir . $base . '.webm' );
 	echo '<div class="inv-frame"><div class="bar"><i></i><i></i><i></i></div>';
-	if ( $has_mp4 || $has_webm ) {
+	if ( $wp_url ) {
+		echo '<video autoplay muted loop playsinline preload="metadata">';
+		printf( '<source src="%s"%s />', esc_url( $wp_url ), $wp_type ? ' type="' . esc_attr( $wp_type ) . '"' : '' );
+		echo '</video>';
+	} elseif ( $has_mp4 || $has_webm ) {
 		echo '<video autoplay muted loop playsinline preload="metadata">';
 		if ( $has_webm ) {
 			printf( '<source src="%s" type="video/webm" />', esc_url( $vid_url . '/' . $base . '.webm' ) );
@@ -434,7 +450,7 @@ $inv_video = function ( $base, $title, $sub ) use ( $vid_dir, $vid_url ) {
 			</div>
 
 			<div class="inv-video-wrap">
-				<?php $inv_video( 'conteo-inventario', 'Video: conteo de inventario', 'Escanea, cuenta y guarda' ); ?>
+				<?php $inv_video( 'conteo-inventario', 'Video: conteo de inventario', 'Escanea, cuenta y guarda', 'inv_video_conteo' ); ?>
 				<div class="cap">
 					<b>Conteo de inventario en vivo</b>
 					<span>Escanea productos, compara físico contra sistema y guarda el conteo</span>

@@ -24,9 +24,14 @@ $img_dir = get_template_directory() . '/assets/img/';
 $vid_url = get_template_directory_uri() . '/assets/video';
 $vid_dir = get_template_directory() . '/assets/video/';
 
+// Video del hero: prioridad al elegido en el Personalizador (Biblioteca de
+// medios), luego al archivo en /assets/video/.
+$cli_video_id  = vlac_opt( 'vc_video_clientes' );
+$cli_wp_video  = $cli_video_id ? wp_get_attachment_url( $cli_video_id ) : '';
+$cli_wp_type   = $cli_video_id ? get_post_mime_type( $cli_video_id ) : '';
 $cli_has_mp4   = file_exists( $vid_dir . 'clientes.mp4' );
 $cli_has_webm  = file_exists( $vid_dir . 'clientes.webm' );
-$cli_has_video = $cli_has_mp4 || $cli_has_webm;
+$cli_has_video = $cli_wp_video || $cli_has_mp4 || $cli_has_webm;
 $cli_poster    = file_exists( $img_dir . 'clientes.png' ) ? $img . '/clientes.png' : '';
 
 // Renderiza una captura enmarcada. Prioridad de la imagen:
@@ -163,10 +168,13 @@ $vc_dev = function ( $file, $ratio, $opt_key = '' ) use ( $img, $img_dir ) {
 							<div class="browserbar"><i></i><i></i><i></i><span class="url">app.tunegocio.com.gt/clientes</span></div>
 							<?php if ( $cli_has_video ) : ?>
 								<video class="shot" autoplay muted loop playsinline preload="metadata"<?php echo $cli_poster ? ' poster="' . esc_url( $cli_poster ) . '"' : ''; ?>>
-									<?php if ( $cli_has_webm ) : ?>
+									<?php if ( $cli_wp_video ) : ?>
+										<source src="<?php echo esc_url( $cli_wp_video ); ?>"<?php echo $cli_wp_type ? ' type="' . esc_attr( $cli_wp_type ) . '"' : ''; ?> />
+									<?php endif; ?>
+									<?php if ( ! $cli_wp_video && $cli_has_webm ) : ?>
 										<source src="<?php echo esc_url( $vid_url . '/clientes.webm' ); ?>" type="video/webm" />
 									<?php endif; ?>
-									<?php if ( $cli_has_mp4 ) : ?>
+									<?php if ( ! $cli_wp_video && $cli_has_mp4 ) : ?>
 										<source src="<?php echo esc_url( $vid_url . '/clientes.mp4' ); ?>" type="video/mp4" />
 									<?php endif; ?>
 								</video>
