@@ -21,7 +21,14 @@ $img = get_template_directory_uri() . '/assets/img';
 <style>
 	/* Estilos de la página de contacto (ámbito local). */
 	#contacto-page{padding:64px 0 96px;background:linear-gradient(180deg,#fff,var(--bg-alt));}
-	#contacto-page .contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:48px;align-items:start;}
+	/* Columna izquierda: panel (fila 1) + medios (fila 2). El formulario abarca
+	   ambas filas para que la altura de la fila 1 la marque el panel y no él;
+	   si no, los medios se irían hasta debajo del formulario.
+	   row-gap:0 porque cada medio ya trae su propio margen superior. */
+	#contacto-page .contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;grid-template-rows:auto auto;column-gap:48px;row-gap:0;align-items:start;}
+	#contacto-page .contact-aside{grid-column:1;grid-row:1;}
+	#contacto-page .contact-media{grid-column:1;grid-row:2;}
+	#contacto-page .contact-card{grid-column:2;grid-row:1 / span 2;}
 	#contacto-page .contact-aside .sec-kicker{margin-bottom:14px;}
 	#contacto-page .contact-aside h1{font-size:clamp(30px,3.6vw,44px);font-weight:800;}
 	#contacto-page .contact-aside .lead{color:var(--muted);font-size:17px;margin-top:16px;max-width:440px;}
@@ -82,7 +89,23 @@ $img = get_template_directory_uri() . '/assets/img';
 	#contacto-page .cf7-row > p{margin:0;}
 
 	@media (max-width:860px){
-		#contacto-page .contact-grid{grid-template-columns:1fr;gap:32px;}
+		#contacto-page{padding-top:40px;}
+		#contacto-page .contact-grid{grid-template-columns:1fr;grid-template-rows:none;row-gap:28px;}
+		/* Se anula la colocación de escritorio y se ordena con `order`. */
+		#contacto-page .contact-aside,
+		#contacto-page .contact-media,
+		#contacto-page .contact-card{grid-column:1;grid-row:auto;}
+		/* En el teléfono el formulario sube justo debajo del título: nadie
+		   debería tener que bajar la página para escribirnos. */
+		#contacto-page .contact-aside{order:1;}
+		#contacto-page .contact-card{order:2;}
+		#contacto-page .contact-media{order:3;}
+		/* El montaje de dispositivos es decorativo y ocupa muchísimo alto. */
+		#contacto-page .contact-media.is-montage{display:none;}
+		#contacto-page .contact-aside-media{margin-top:0;}
+		#contacto-page .contact-aside .lead{margin-top:12px;}
+		#contacto-page .contact-points{margin-top:22px;}
+		#contacto-page .contact-card{padding:24px 20px;}
 	}
 	@media (max-width:520px){
 		#contacto-page .cf7-row{grid-template-columns:1fr;}
@@ -122,8 +145,26 @@ $img = get_template_directory_uri() . '/assets/img';
 				<?php if ( vlac_opt( 'contact_aside_text' ) ) : ?>
 					<div class="contact-aside-extra"><?php echo wp_kses_post( wpautop( vlac_opt( 'contact_aside_text' ) ) ); ?></div>
 				<?php endif; ?>
+			</div>
 
-				<?php $vlac_aside_img = vlac_opt( 'contact_aside_image' ); ?>
+			<div class="contact-card">
+				<?php
+				while ( have_posts() ) :
+					the_post();
+					the_content();
+				endwhile;
+				?>
+			</div>
+
+			<?php
+			/*
+			 * Bloque de medios: va fuera del panel para poder reordenarlo. En
+			 * escritorio cae bajo el panel izquierdo; en el teléfono se manda
+			 * debajo del formulario (y el montaje decorativo se oculta).
+			 */
+			$vlac_aside_img = vlac_opt( 'contact_aside_image' );
+			?>
+			<div class="contact-media <?php echo $vlac_aside_img ? 'is-image' : 'is-montage'; ?>">
 				<?php if ( $vlac_aside_img ) : ?>
 					<div class="contact-aside-media">
 						<img src="<?php echo esc_url( $vlac_aside_img ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" loading="lazy" />
@@ -149,15 +190,6 @@ $img = get_template_directory_uri() . '/assets/img';
 						</div>
 					</div>
 				<?php endif; ?>
-			</div>
-
-			<div class="contact-card">
-				<?php
-				while ( have_posts() ) :
-					the_post();
-					the_content();
-				endwhile;
-				?>
 			</div>
 
 		</div>

@@ -120,7 +120,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="menu-item"><a class="menu-link" href="#">Precios</a></div>
+				<div class="menu-item"><a class="menu-link" href="<?php echo esc_url( home_url( '/precios/' ) ); ?>">Precios</a></div>
 				<div class="menu-item"><a class="menu-link" href="<?php echo esc_url( vlac_contact_url() ); ?>">Ayuda</a></div>
 				<div class="menu-item"><a class="menu-link" href="<?php echo esc_url( vlac_clients_url() ); ?>">Nuestros clientes</a></div>
 			</div>
@@ -161,7 +161,7 @@
 		<h6>Distribución</h6>
 		<a href="<?php echo esc_url( home_url( '/industrias/venta-de-repuestos/' ) ); ?>">Venta de repuestos</a>
 	</div>
-	<a class="m-link" href="#">Precios</a>
+	<a class="m-link" href="<?php echo esc_url( home_url( '/precios/' ) ); ?>">Precios</a>
 	<a class="m-link" href="<?php echo esc_url( vlac_contact_url() ); ?>">Ayuda</a>
 	<a class="m-link" href="<?php echo esc_url( vlac_clients_url() ); ?>">Nuestros clientes</a>
 	<div class="mobile-cta">

@@ -67,7 +67,8 @@ $ms_shot = function ( $file, $caption, $opt_key = '' ) use ( $img, $img_dir ) {
 	/* ---------- HERO CENTRADO ---------- */
 	#ms-page .ms-hero{position:relative;overflow:hidden;text-align:center;}
 	#ms-page .ms-hero::before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(900px 460px at 50% -8%,rgba(193,39,45,.09),transparent 62%),linear-gradient(180deg,#fff,var(--bg-alt));}
-	#ms-page .ms-hero .wrap{position:relative;z-index:1;padding:72px 0 0;}
+	/* Solo padding vertical: el lateral lo pone .wrap del tema (24px / 18px en móvil). */
+	#ms-page .ms-hero .wrap{position:relative;z-index:1;padding-top:72px;}
 	#ms-page .ms-hero h1{font-size:clamp(32px,5vw,54px);font-weight:800;max-width:900px;margin:0 auto;}
 	#ms-page .ms-hero .lead{color:var(--muted);font-size:18.5px;margin:22px auto 0;max-width:620px;}
 	#ms-page .ms-hero .hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:30px;}
@@ -130,7 +131,7 @@ $ms_shot = function ( $file, $caption, $opt_key = '' ) use ( $img, $img_dir ) {
 	#ms-page .ms-step p{color:var(--muted);font-size:14px;margin-bottom:16px;}
 
 	@media (max-width:900px){
-		#ms-page .ms-hero .wrap{padding:56px 0 0;}
+		#ms-page .ms-hero .wrap{padding-top:56px;}
 		#ms-page .ms-hero-shot{transform:translateY(20px);margin-top:34px;}
 		#ms-page .ms-bento{grid-template-columns:1fr;}
 		#ms-page .ms-cell.is-feature{grid-template-columns:1fr;gap:22px;}

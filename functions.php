@@ -534,6 +534,54 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_video_fields( $wp_customize, $inf_videos, 'vlac_inf' );
 
+	/* ---------- Página Precios ---------- */
+	$wp_customize->add_section(
+		'vlac_pre',
+		array(
+			'title'       => __( 'Página Precios', 'vlac-systems' ),
+			'description' => __( 'El plan que tenga texto en su «Etiqueta» se muestra resaltado como plan destacado. Deja la etiqueta vacía para no resaltarlo.', 'vlac-systems' ),
+			'panel'       => 'vlac_home',
+		)
+	);
+	$pre_fields = array(
+		'pre_eyebrow'  => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Planes y precios', 'text' ),
+		'pre_title'    => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'Elige el plan que le queda a tu <span class="accent">negocio</span>', 'html' ),
+		'pre_sub'      => array( __( 'Subtítulo', 'vlac-systems' ), 'Todos los planes incluyen el sistema completo. Lo único que cambia es cuántas sucursales y cuántos usuarios necesitas.', 'textarea' ),
+		'pre_note'     => array( __( 'Nota bajo el subtítulo', 'vlac-systems' ), 'Facturador FEL y todos los módulos incluidos en cada plan', 'text' ),
+		'pre_currency' => array( __( 'Moneda (símbolo)', 'vlac-systems' ), 'Q', 'text' ),
+		'pre_period'   => array( __( 'Periodicidad (texto bajo el precio)', 'vlac-systems' ), 'al mes', 'text' ),
+		'pre_btn_txt'  => array( __( 'Botón de los planes — texto', 'vlac-systems' ), 'Empezar', 'text' ),
+		'pre_cta_url'  => array( __( 'Botón de los planes — enlace (vacío = página de Contacto)', 'vlac-systems' ), '', 'url' ),
+
+		'pre_p1_name'     => array( __( 'Plan 1 · Nombre', 'vlac-systems' ), 'Básico', 'text' ),
+		'pre_p1_price'    => array( __( 'Plan 1 · Precio', 'vlac-systems' ), '200', 'text' ),
+		'pre_p1_branches' => array( __( 'Plan 1 · Sucursales', 'vlac-systems' ), '1', 'text' ),
+		'pre_p1_users'    => array( __( 'Plan 1 · Usuarios', 'vlac-systems' ), '3', 'text' ),
+		'pre_p1_badge'    => array( __( 'Plan 1 · Etiqueta (vacío = sin resaltar)', 'vlac-systems' ), '', 'text' ),
+
+		'pre_p2_name'     => array( __( 'Plan 2 · Nombre', 'vlac-systems' ), 'Esencial', 'text' ),
+		'pre_p2_price'    => array( __( 'Plan 2 · Precio', 'vlac-systems' ), '550', 'text' ),
+		'pre_p2_branches' => array( __( 'Plan 2 · Sucursales', 'vlac-systems' ), '1', 'text' ),
+		'pre_p2_users'    => array( __( 'Plan 2 · Usuarios', 'vlac-systems' ), '10', 'text' ),
+		'pre_p2_badge'    => array( __( 'Plan 2 · Etiqueta (vacío = sin resaltar)', 'vlac-systems' ), '', 'text' ),
+
+		'pre_p3_name'     => array( __( 'Plan 3 · Nombre', 'vlac-systems' ), 'Estándar', 'text' ),
+		'pre_p3_price'    => array( __( 'Plan 3 · Precio', 'vlac-systems' ), '1000', 'text' ),
+		'pre_p3_branches' => array( __( 'Plan 3 · Sucursales', 'vlac-systems' ), '2', 'text' ),
+		'pre_p3_users'    => array( __( 'Plan 3 · Usuarios', 'vlac-systems' ), '20', 'text' ),
+		'pre_p3_badge'    => array( __( 'Plan 3 · Etiqueta (vacío = sin resaltar)', 'vlac-systems' ), 'Más popular', 'text' ),
+
+		'pre_p4_name'     => array( __( 'Plan 4 · Nombre', 'vlac-systems' ), 'Premium', 'text' ),
+		'pre_p4_price'    => array( __( 'Plan 4 · Precio', 'vlac-systems' ), '2000', 'text' ),
+		'pre_p4_branches' => array( __( 'Plan 4 · Sucursales', 'vlac-systems' ), '4', 'text' ),
+		'pre_p4_users'    => array( __( 'Plan 4 · Usuarios', 'vlac-systems' ), '50', 'text' ),
+		'pre_p4_badge'    => array( __( 'Plan 4 · Etiqueta (vacío = sin resaltar)', 'vlac-systems' ), '', 'text' ),
+
+		'pre_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), '¿No sabes cuál plan te conviene?', 'text' ),
+		'pre_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Cuéntanos cuántas sucursales tienes y cuánta gente lo va a usar. Un asesor te dice cuál te queda mejor.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $pre_fields, 'vlac_pre' );
+
 	/* ---------- Barra superior / botones del header ---------- */
 	$wp_customize->add_section(
 		'vlac_header',
