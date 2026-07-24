@@ -448,6 +448,41 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_video_fields( $wp_customize, $pos_videos, 'vlac_pos' );
 
+	/* ---------- Página Tienda de Ropa ---------- */
+	$wp_customize->add_section(
+		'vlac_ropa',
+		array(
+			'title' => __( 'Página Tienda de Ropa', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$ropa_fields = array(
+		'ropa_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Tienda de Ropa', 'text' ),
+		'ropa_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'El sistema hecho para tu <span class="accent">tienda de ropa</span>', 'html' ),
+		'ropa_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Controla cada prenda por talla y color, imprime etiquetas con código de barras, vende rápido en caja y sabe qué se vende por temporada, todo en un mismo sistema.', 'textarea' ),
+		'ropa_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Lleva tu tienda de ropa al siguiente nivel', 'text' ),
+		'ropa_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Controla cada prenda por talla y color, etiqueta, vende y analiza tu temporada desde un solo sistema conectado.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $ropa_fields, 'vlac_ropa' );
+
+	// Capturas de pantalla (selector de medios de WordPress). Si se elige una
+	// imagen aquí, tiene prioridad sobre el archivo de /assets/img/.
+	$ropa_images = array(
+		'ropa_img_hero'        => __( 'Hero · Imagen destacada (opcional)', 'vlac-systems' ),
+		'ropa_img_producto'    => __( 'Ficha del producto (talla, color, marca)', 'vlac-systems' ),
+		'ropa_img_existencias' => __( 'Existencias por variante', 'vlac-systems' ),
+		'ropa_img_etiquetas'   => __( 'Etiqueta con código de barras', 'vlac-systems' ),
+		'ropa_img_catalogo'    => __( 'Catálogo / listado con fotos', 'vlac-systems' ),
+		'ropa_img_informes'    => __( 'Informe de ventas por temporada', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $ropa_images, 'vlac_ropa' );
+
+	$ropa_videos = array(
+		'ropa_video_variantes' => __( 'Video · Variantes de la prenda', 'vlac-systems' ),
+		'ropa_video_venta'     => __( 'Video · Una venta de ropa', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $ropa_videos, 'vlac_ropa' );
+
 	/* ---------- Página Gestión Financiera ---------- */
 	$wp_customize->add_section(
 		'vlac_fin',
