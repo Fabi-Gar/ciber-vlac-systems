@@ -409,6 +409,45 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_video_fields( $wp_customize, $inv_videos, 'vlac_inv' );
 
+	/* ---------- Página Punto de Venta ---------- */
+	$wp_customize->add_section(
+		'vlac_pos',
+		array(
+			'title' => __( 'Página Punto de Venta', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$pos_fields = array(
+		'pos_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Punto de Venta', 'text' ),
+		'pos_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'Tu <span class="accent">caja</span> completa, del turno a la <span class="accent">factura</span>', 'html' ),
+		'pos_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Abre la caja, toma órdenes, cobra con cualquier forma de pago, factura, registra gastos y cierra con arqueo. Todo queda cuadrado y auditable al final del turno.', 'textarea' ),
+		'pos_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Pon a trabajar tu punto de venta hoy', 'text' ),
+		'pos_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Cobra más rápido, factura al instante y cierra cada turno cuadrado, con la caja conectada a tu inventario y tus ventas.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $pos_fields, 'vlac_pos' );
+
+	// Capturas de pantalla (selector de medios de WordPress). Si se elige una
+	// imagen aquí, tiene prioridad sobre el archivo de /assets/img/.
+	$pos_images = array(
+		'pos_img_hero'        => __( 'Hero · Imagen destacada (opcional)', 'vlac-systems' ),
+		'pos_img_cajas'       => __( 'Listado de cajas', 'vlac-systems' ),
+		'pos_img_apertura'    => __( 'Apertura de caja', 'vlac-systems' ),
+		'pos_img_orden'       => __( 'Pantalla de orden (POS)', 'vlac-systems' ),
+		'pos_img_pago'        => __( 'Cobro y tipos de pago', 'vlac-systems' ),
+		'pos_img_factura'     => __( 'Factura / recibo térmico', 'vlac-systems' ),
+		'pos_img_gastos'      => __( 'Registro de gastos', 'vlac-systems' ),
+		'pos_img_resumen'     => __( 'Resumen de caja', 'vlac-systems' ),
+		'pos_img_libro'       => __( 'Libro de caja / historial', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $pos_images, 'vlac_pos' );
+
+	$pos_videos = array(
+		'pos_video_operaciones' => __( 'Video · Operaciones de caja', 'vlac-systems' ),
+		'pos_video_billetes'    => __( 'Video · Cálculo de billetes (arqueo)', 'vlac-systems' ),
+		'pos_video_venta'       => __( 'Video · Una venta en el punto de venta', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $pos_videos, 'vlac_pos' );
+
 	/* ---------- Página Gestión Financiera ---------- */
 	$wp_customize->add_section(
 		'vlac_fin',
