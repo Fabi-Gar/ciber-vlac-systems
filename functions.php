@@ -481,6 +481,43 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_video_fields( $wp_customize, $fer_videos, 'vlac_fer' );
 
+	/* ---------- Página Hoteles y Posadas ---------- */
+	$wp_customize->add_section(
+		'vlac_hot',
+		array(
+			'title' => __( 'Página Hoteles y Posadas', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$hot_fields = array(
+		'hot_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Hoteles y Posadas', 'text' ),
+		'hot_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'El sistema para tu <span class="accent">hotel</span> o <span class="accent">posada</span>', 'html' ),
+		'hot_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Mira la disponibilidad de todas tus habitaciones en un solo mapa, reserva, haz check-in cama por cama y cierra la cuenta con los consumos y la factura al momento de la salida.', 'textarea' ),
+		'hot_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Llena tu hotel y controla cada habitación', 'text' ),
+		'hot_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Reserva, hospeda, cobra y factura desde un solo sistema conectado, con la disponibilidad de tus habitaciones siempre al día.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $hot_fields, 'vlac_hot' );
+
+	// Capturas de pantalla (selector de medios de WordPress). Si se elige una
+	// imagen aquí, tiene prioridad sobre el archivo de /assets/img/.
+	$hot_images = array(
+		'hot_img_hero'       => __( 'Hero · Foto del hotel o la posada (opcional)', 'vlac-systems' ),
+		'hot_img_mapa'       => __( 'Mapa de disponibilidad (habitaciones × días)', 'vlac-systems' ),
+		'hot_img_habitacion' => __( 'Ficha de la habitación (código, categoría, camas)', 'vlac-systems' ),
+		'hot_img_reserva'    => __( 'Detalle de la reserva', 'vlac-systems' ),
+		'hot_img_categorias' => __( 'Categorías con planes de tarifa', 'vlac-systems' ),
+		'hot_img_precios'    => __( 'Precios por temporada / días de la semana', 'vlac-systems' ),
+		'hot_img_informes'   => __( 'Informe de reservas / ocupación', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $hot_images, 'vlac_hot' );
+
+	$hot_videos = array(
+		'hot_video_reserva'  => __( 'Video · Crear una reserva desde el mapa', 'vlac-systems' ),
+		'hot_video_checkin'  => __( 'Video · Check-in con asignación de camas', 'vlac-systems' ),
+		'hot_video_checkout' => __( 'Video · Check-out y facturación', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $hot_videos, 'vlac_hot' );
+
 	/* ---------- Página Tienda de Ropa ---------- */
 	$wp_customize->add_section(
 		'vlac_ropa',

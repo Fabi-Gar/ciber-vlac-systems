@@ -101,7 +101,7 @@
 							<div class="mega-col">
 								<h5>Alimentos y hospitalidad</h5>
 								<a href="<?php echo esc_url( home_url( '/industrias/restaurantes/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M5 3v7a2 2 0 002 2v9M9 3v9M7 3v4M19 3c-2 0-3 3-3 6h3V3zm0 9v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Bar y Restaurantes</a>
-								<a href="<?php echo esc_url( home_url( '/industrias/hoteles/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 21V8l9-4 9 4v13M3 21h18M9 21v-6h6v6M7 11h.01M12 11h.01M17 11h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Hoteles</a>
+								<a href="<?php echo esc_url( home_url( '/industrias/hoteles/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 21V8l9-4 9 4v13M3 21h18M9 21v-6h6v6M7 11h.01M12 11h.01M17 11h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Hoteles y posadas</a>
 							</div>
 							<div class="mega-col">
 								<h5>Servicios profesionales</h5>
@@ -155,7 +155,7 @@
 		<h6>Venta minorista</h6>
 		<a href="<?php echo esc_url( home_url( '/industrias/punto-de-venta/' ) ); ?>">Punto de venta</a><a href="<?php echo esc_url( home_url( '/industrias/venta-de-ropa/' ) ); ?>">Venta de ropa</a><a href="<?php echo esc_url( home_url( '/industrias/ferreteria-y-vidrieria/' ) ); ?>">Ferretería y vidriería</a>
 		<h6>Alimentos y hospitalidad</h6>
-		<a href="<?php echo esc_url( home_url( '/industrias/restaurantes/' ) ); ?>">Bar y Restaurantes</a><a href="<?php echo esc_url( home_url( '/industrias/hoteles/' ) ); ?>">Hoteles</a>
+		<a href="<?php echo esc_url( home_url( '/industrias/restaurantes/' ) ); ?>">Bar y Restaurantes</a><a href="<?php echo esc_url( home_url( '/industrias/hoteles/' ) ); ?>">Hoteles y posadas</a>
 		<h6>Servicios profesionales</h6>
 		<a href="<?php echo esc_url( home_url( '/industrias/clinicas-y-hospitales/' ) ); ?>">Clínicas y hospitales</a><a href="<?php echo esc_url( home_url( '/industrias/veterinarias/' ) ); ?>">Veterinarias</a><a href="<?php echo esc_url( home_url( '/industrias/talleres/' ) ); ?>">Talleres</a>
 		<h6>Distribución</h6>
