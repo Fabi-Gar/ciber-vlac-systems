@@ -448,6 +448,39 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_video_fields( $wp_customize, $pos_videos, 'vlac_pos' );
 
+	/* ---------- Página Ferretería y Vidriería ---------- */
+	$wp_customize->add_section(
+		'vlac_fer',
+		array(
+			'title' => __( 'Página Ferretería y Vidriería', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$fer_fields = array(
+		'fer_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Ferretería y Vidriería', 'text' ),
+		'fer_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'El sistema para tu <span class="accent">ferretería</span> y <span class="accent">vidriería</span>', 'html' ),
+		'fer_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Maneja miles de artículos con su unidad de medida, compra a tus proveedores, cotiza trabajos, etiqueta con código de barras y vende rápido en caja, todo en un mismo sistema.', 'textarea' ),
+		'fer_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Ordena tu ferretería y vidriería hoy', 'text' ),
+		'fer_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Controla miles de artículos por medida, compra, cotiza, etiqueta y vende desde un solo sistema conectado.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $fer_fields, 'vlac_fer' );
+
+	// Capturas de pantalla (selector de medios de WordPress). Si se elige una
+	// imagen aquí, tiene prioridad sobre el archivo de /assets/img/.
+	$fer_images = array(
+		'fer_img_hero'        => __( 'Hero · Imagen destacada (opcional)', 'vlac-systems' ),
+		'fer_img_medidas'     => __( 'Ficha del artículo (unidad de medida)', 'vlac-systems' ),
+		'fer_img_catalogo'    => __( 'Catálogo / listado de artículos', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $fer_images, 'vlac_fer' );
+
+	$fer_videos = array(
+		'fer_video_cotizacion' => __( 'Video · Cotización de un trabajo', 'vlac-systems' ),
+		'fer_video_existencias' => __( 'Video · Existencias por bodega', 'vlac-systems' ),
+		'fer_video_venta'       => __( 'Video · Una venta de mostrador', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $fer_videos, 'vlac_fer' );
+
 	/* ---------- Página Tienda de Ropa ---------- */
 	$wp_customize->add_section(
 		'vlac_ropa',
