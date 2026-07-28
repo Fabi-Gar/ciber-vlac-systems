@@ -481,6 +481,109 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_video_fields( $wp_customize, $fer_videos, 'vlac_fer' );
 
+	/* ---------- Página Talleres ---------- */
+	$wp_customize->add_section(
+		'vlac_tal',
+		array(
+			'title' => __( 'Página Talleres', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$tal_fields = array(
+		'tal_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Talleres', 'text' ),
+		'tal_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'El sistema para tu <span class="accent">taller</span>', 'html' ),
+		'tal_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Levanta la orden de servicio con los datos que tu taller pide, cotiza el trabajo, controla en qué va cada unidad y entrega con su comprobante, sus repuestos y su factura.', 'textarea' ),
+		'tal_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Ordena tu taller desde la primera cotización', 'text' ),
+		'tal_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Órdenes de servicio, anticipos, repuestos, comisiones y facturación en un solo sistema conectado.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $tal_fields, 'vlac_tal' );
+
+	// Capturas de pantalla (selector de medios de WordPress). Si se elige una
+	// imagen aquí, tiene prioridad sobre el archivo de /assets/img/.
+	$tal_images = array(
+		'tal_img_hero'      => __( 'Hero · Orden de servicio abierta', 'vlac-systems' ),
+		'tal_img_lista'     => __( 'Listado de órdenes con sus estados', 'vlac-systems' ),
+		'tal_img_plantilla' => __( 'Plantilla y campos de la orden', 'vlac-systems' ),
+		'tal_img_cuenta'    => __( 'Cobro con repuestos y anticipos', 'vlac-systems' ),
+		'tal_img_impresion' => __( 'Comprobante impreso o de entrega', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $tal_images, 'vlac_tal' );
+
+	$tal_videos = array(
+		'tal_video_orden' => __( 'Video · Crear una orden de servicio', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $tal_videos, 'vlac_tal' );
+
+	/* ---------- Página Veterinarias ---------- */
+	$wp_customize->add_section(
+		'vlac_vet',
+		array(
+			'title' => __( 'Página Veterinarias', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$vet_fields = array(
+		'vet_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Veterinarias', 'text' ),
+		'vet_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'El sistema para tu <span class="accent">veterinaria</span>', 'html' ),
+		'vet_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Cada dueño con sus mascotas y cada mascota con su ficha, su historial, sus vacunas y sus recetas. Atiende, vende el alimento y factura desde el mismo lugar.', 'textarea' ),
+		'vet_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Ordena tu veterinaria y cuida mejor a cada paciente', 'text' ),
+		'vet_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Fichas, historial, vacunas, recetas, inventario y facturación en un solo sistema conectado.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $vet_fields, 'vlac_vet' );
+
+	// Capturas de pantalla (selector de medios de WordPress). Si se elige una
+	// imagen aquí, tiene prioridad sobre el archivo de /assets/img/.
+	$vet_images = array(
+		'vet_img_hero'      => __( 'Hero · Atendimiento de la mascota', 'vlac-systems' ),
+		'vet_img_ficha'     => __( 'Ficha de la mascota', 'vlac-systems' ),
+		'vet_img_mascotas'  => __( 'Listado de mascotas del dueño', 'vlac-systems' ),
+		'vet_img_vacunas'   => __( 'Registro de vacunas', 'vlac-systems' ),
+		'vet_img_registrar' => __( 'Alta de una mascota nueva', 'vlac-systems' ),
+		'vet_img_cuenta'    => __( 'Cobro de la consulta y los productos', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $vet_images, 'vlac_vet' );
+
+	$vet_videos = array(
+		'vet_video_consulta' => __( 'Video · Atender a la mascota y registrar la vacuna', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $vet_videos, 'vlac_vet' );
+
+	/* ---------- Página Clínicas y Hospitales ---------- */
+	$wp_customize->add_section(
+		'vlac_cli',
+		array(
+			'title' => __( 'Página Clínicas y Hospitales', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$cli_fields = array(
+		'cli_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Clínicas y Hospitales', 'text' ),
+		'cli_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'El sistema para tu <span class="accent">clínica</span> u <span class="accent">hospital</span>', 'html' ),
+		'cli_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Agenda las citas, atiende la consulta con tus propios formularios, emite recetas y guarda todo en el expediente del paciente, con el cobro y la factura en el mismo lugar.', 'textarea' ),
+		'cli_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Ordena tu clínica y dedica el tiempo al paciente', 'text' ),
+		'cli_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Agenda, expediente, recetas, vacunas y cobro en un solo sistema conectado, con el historial de cada paciente siempre a la mano.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $cli_fields, 'vlac_cli' );
+
+	// Capturas de pantalla (selector de medios de WordPress). Si se elige una
+	// imagen aquí, tiene prioridad sobre el archivo de /assets/img/.
+	$cli_images = array(
+		'cli_img_agenda'     => __( 'Hero · Agenda de citas del día', 'vlac-systems' ),
+		'cli_img_expediente' => __( 'Historial médico del paciente', 'vlac-systems' ),
+		'cli_img_formulario' => __( 'Formulario configurable de la consulta', 'vlac-systems' ),
+		'cli_img_preguntas'  => __( 'Listado de preguntas del formulario', 'vlac-systems' ),
+		'cli_img_receta'     => __( 'Receta o nota lista para imprimir', 'vlac-systems' ),
+		'cli_img_cuenta'     => __( 'Cobro de la consulta', 'vlac-systems' ),
+		'cli_img_agendar'    => __( 'Nueva consulta (agendar una cita)', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $cli_images, 'vlac_cli' );
+
+	$cli_videos = array(
+		'cli_video_consulta' => __( 'Video · Atender la consulta', 'vlac-systems' ),
+		'cli_video_receta'   => __( 'Video · Emitir una receta', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $cli_videos, 'vlac_cli' );
+
 	/* ---------- Página Hoteles y Posadas ---------- */
 	$wp_customize->add_section(
 		'vlac_hot',
