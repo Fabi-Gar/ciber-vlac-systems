@@ -481,6 +481,39 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_video_fields( $wp_customize, $fer_videos, 'vlac_fer' );
 
+	/* ---------- Página Venta de Repuestos ---------- */
+	$wp_customize->add_section(
+		'vlac_rep',
+		array(
+			'title' => __( 'Página Venta de Repuestos', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$rep_fields = array(
+		'rep_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Venta de Repuestos', 'text' ),
+		'rep_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'El sistema para tu <span class="accent">venta de repuestos</span>', 'html' ),
+		'rep_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Encuentra la pieza por cualquiera de sus códigos, sabe en qué anaquel está y en qué sucursal queda, cotiza al taller y vende en mostrador con su factura.', 'textarea' ),
+		'rep_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Ordena tu venta de repuestos hoy', 'text' ),
+		'rep_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Catálogo, códigos, existencias, proveedores y facturación en un solo sistema conectado.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $rep_fields, 'vlac_rep' );
+
+	// Capturas de pantalla (selector de medios de WordPress). Si se elige una
+	// imagen aquí, tiene prioridad sobre el archivo de /assets/img/.
+	$rep_images = array(
+		'rep_img_hero'         => __( 'Hero · Ficha del repuesto o catálogo', 'vlac-systems' ),
+		'rep_img_existencias'  => __( 'Existencias por sucursal', 'vlac-systems' ),
+		'rep_img_precios'      => __( 'Listas de precios', 'vlac-systems' ),
+		'rep_img_proveedores'  => __( 'Compra o requisición a proveedores', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $rep_images, 'vlac_rep' );
+
+	$rep_videos = array(
+		'rep_video_busqueda' => __( 'Video · Encontrar la pieza', 'vlac-systems' ),
+		'rep_video_venta'    => __( 'Video · Una venta de mostrador', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $rep_videos, 'vlac_rep' );
+
 	/* ---------- Página Talleres ---------- */
 	$wp_customize->add_section(
 		'vlac_tal',
