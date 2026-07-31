@@ -407,7 +407,7 @@ get_header();
 		<div class="max-w-[1180px] mx-auto px-gutter text-center">
 			<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md mb-6 text-white">¿Listo para llevar tu restaurante al siguiente nivel?</h2>
 			<p class="text-on-primary-container font-body-lg mb-10 max-w-2xl mx-auto">
-				Únete a los más de 500 establecimientos que ya confían en Ciber Vlac Systems para su operación diaria.
+				Únete a los más de 500 establecimientos que ya confían en Vlac Systems para su operación diaria.
 			</p>
 			<div class="flex flex-col sm:flex-row gap-6 justify-center">
 				<a href="<?php echo esc_url( vlac_cta_url( 'rest_cta3_url' ) ); ?>" class="cta-press inline-block text-center bg-white text-primary px-10 py-5 rounded-[10px] font-extrabold text-body-lg hover:bg-surface transition-all shadow-lg">

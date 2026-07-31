@@ -38,14 +38,13 @@
 						printf(
 							'<img src="%s" alt="%s" />',
 							esc_url( get_template_directory_uri() . '/assets/img/logo.png' ),
-							esc_attr__( 'Logo Ciber Vlac Systems', 'vlac-systems' )
+							esc_attr__( 'Logo Vlac Systems', 'vlac-systems' )
 						);
 					}
 					?>
 				</span>
 				<span class="logo-text">
-					<span class="l1"><b>Ciber</b> Vlac Systems</span>
-					<span class="l2"><?php esc_html_e( 'Sociedad Anónima', 'vlac-systems' ); ?></span>
+					<span class="l1"><b>Vlac</b> Systems</span>
 				</span>
 			</a>
 
@@ -121,7 +120,6 @@
 					</div>
 				</div>
 				<div class="menu-item"><a class="menu-link" href="<?php echo esc_url( home_url( '/precios/' ) ); ?>">Precios</a></div>
-				<div class="menu-item"><a class="menu-link" href="<?php echo esc_url( vlac_contact_url() ); ?>">Ayuda</a></div>
 				<div class="menu-item"><a class="menu-link" href="<?php echo esc_url( vlac_clients_url() ); ?>">Nuestros clientes</a></div>
 			</div>
 
@@ -162,7 +160,6 @@
 		<a href="<?php echo esc_url( home_url( '/industrias/venta-de-repuestos/' ) ); ?>">Venta de repuestos</a>
 	</div>
 	<a class="m-link" href="<?php echo esc_url( home_url( '/precios/' ) ); ?>">Precios</a>
-	<a class="m-link" href="<?php echo esc_url( vlac_contact_url() ); ?>">Ayuda</a>
 	<a class="m-link" href="<?php echo esc_url( vlac_clients_url() ); ?>">Nuestros clientes</a>
 	<div class="mobile-cta">
 		<a class="btn btn-red btn-lg" href="<?php echo esc_url( vlac_cta_url( 'hdr_cta_url' ) ); ?>"><?php echo esc_html( vlac_opt( 'hdr_cta_txt', 'Prueba gratis' ) ); ?></a>

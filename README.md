@@ -1,6 +1,6 @@
-# Ciber Vlac Systems — Tema de WordPress
+# Vlac Systems — Tema de WordPress
 
-Réplica fiel de la landing page de **Ciber Vlac Systems S.A.** (ERP + Facturador FEL para Guatemala), convertida en un tema de WordPress instalable y editable.
+Réplica fiel de la landing page de **Vlac Systems** (ERP + Facturador FEL para Guatemala), convertida en un tema de WordPress instalable y editable.
 
 ## Contenido del tema
 

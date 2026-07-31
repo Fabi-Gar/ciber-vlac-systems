@@ -24,12 +24,12 @@
 							printf(
 								'<img src="%s" alt="%s" />',
 								esc_url( get_template_directory_uri() . '/assets/img/logo.png' ),
-								esc_attr__( 'Logo Ciber Vlac Systems', 'vlac-systems' )
+								esc_attr__( 'Logo Vlac Systems', 'vlac-systems' )
 							);
 						}
 						?>
 					</span>
-					<span class="logo-text"><span class="l1"><b>Ciber</b> Vlac Systems</span><span class="l2"><?php esc_html_e( 'Sociedad Anónima', 'vlac-systems' ); ?></span></span>
+					<span class="logo-text"><span class="l1"><b>Vlac</b> Systems</span></span>
 				</a>
 				<p><?php echo esc_html( vlac_opt( 'foot_desc', 'ERP personalizado con Facturación Electrónica FEL para negocios en Guatemala.' ) ); ?></p>
 			</div>
@@ -97,7 +97,7 @@
 		</div>
 
 		<div class="foot-bottom">
-			<span><?php echo esc_html( vlac_opt( 'foot_copy', '© ' . date( 'Y' ) . ' Ciber Vlac Systems S.A. Todos los derechos reservados.' ) ); ?></span>
+			<span><?php echo esc_html( vlac_opt( 'foot_copy', '© ' . date( 'Y' ) . ' Vlac Systems. Todos los derechos reservados.' ) ); ?></span>
 			<span><?php echo esc_html( vlac_opt( 'foot_legal', 'Guatemala · Certificado ante la SAT' ) ); ?></span>
 		</div>
 	</div>

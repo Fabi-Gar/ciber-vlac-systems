@@ -1,6 +1,6 @@
 <?php
 /**
- * Ciber Vlac Systems — funciones del tema
+ * Vlac Systems — funciones del tema
  *
  * @package Vlac_Systems
  */
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'VLAC_VERSION' ) ) {
-	define( 'VLAC_VERSION', '1.3.0' );
+	define( 'VLAC_VERSION', '1.3.1' );
 }
 
 /**
@@ -103,8 +103,8 @@ function vlac_opt( $key, $default = '' ) {
 /**
  * Devuelve la URL de la página de Contacto.
  *
- * Se usa como destino por defecto de los botones «Prueba gratis»,
- * «Ayuda» y «Hablar con un asesor». Prioridad:
+ * Se usa como destino por defecto de los botones «Prueba gratis»
+ * y «Hablar con un asesor». Prioridad:
  *   1) La página que use la plantilla «Contacto» (page-contacto.php).
  *   2) Una página con slug «contacto».
  *   3) La portada, como último recurso.
@@ -948,7 +948,7 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	$footer_fields = array(
 		'foot_desc'   => array( __( 'Descripción de la marca', 'vlac-systems' ), 'ERP personalizado con Facturación Electrónica FEL para negocios en Guatemala.', 'textarea' ),
-		'foot_copy'   => array( __( 'Texto de copyright', 'vlac-systems' ), '© ' . date( 'Y' ) . ' Ciber Vlac Systems S.A. Todos los derechos reservados.', 'text' ),
+		'foot_copy'   => array( __( 'Texto de copyright', 'vlac-systems' ), '© ' . date( 'Y' ) . ' Vlac Systems. Todos los derechos reservados.', 'text' ),
 		'foot_legal'  => array( __( 'Texto legal derecho', 'vlac-systems' ), 'Guatemala · Certificado ante la SAT', 'text' ),
 	);
 	vlac_add_fields( $wp_customize, $footer_fields, 'vlac_footer' );
@@ -1136,7 +1136,6 @@ function vlac_primary_fallback() {
 		'Aplicaciones' => '#',
 		'Industrias'   => '#',
 		'Precios'      => '#',
-		'Ayuda'        => '#',
 	);
 	foreach ( $items as $label => $url ) {
 		printf(

@@ -1,6 +1,6 @@
 /**
  * Menú móvil y acordeón de industrias.
- * Ciber Vlac Systems
+ * Vlac Systems
  */
 ( function () {
 	'use strict';
