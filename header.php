@@ -121,6 +121,28 @@
 				</div>
 				<div class="menu-item"><a class="menu-link" href="<?php echo esc_url( home_url( '/precios/' ) ); ?>">Precios</a></div>
 				<div class="menu-item"><a class="menu-link" href="<?php echo esc_url( vlac_clients_url() ); ?>">Nuestros clientes</a></div>
+				<div class="menu-item">
+					<button class="menu-link" aria-haspopup="true" aria-expanded="false">
+						Agente
+						<svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</button>
+					<div class="mega mega-sm" role="menu">
+						<div class="agent-drop">
+							<span class="agent-ic">
+								<svg viewBox="0 0 24 24" fill="none"><path d="M7 8V4h10v4M7 16v4h10v-4M4 8h16v8H4V8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 12h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+							</span>
+							<div class="agent-body">
+								<h5><?php echo esc_html( vlac_opt( 'agent_title', 'Agente de impresión' ) ); ?></h5>
+								<p><?php echo esc_html( vlac_opt( 'agent_desc', VLAC_AGENT_DESC ) ); ?></p>
+								<a class="btn btn-red" href="<?php echo esc_url( vlac_agent_url() ); ?>" download>
+									<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+									<?php echo esc_html( vlac_opt( 'agent_btn_txt', 'Descargar agente' ) ); ?>
+								</a>
+								<span class="agent-note"><?php echo esc_html( vlac_agent_note() ); ?></span>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div class="nav-right">
@@ -161,6 +183,17 @@
 	</div>
 	<a class="m-link" href="<?php echo esc_url( home_url( '/precios/' ) ); ?>">Precios</a>
 	<a class="m-link" href="<?php echo esc_url( vlac_clients_url() ); ?>">Nuestros clientes</a>
+	<button class="m-acc-head" aria-expanded="false">Agente
+		<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+	</button>
+	<div class="m-acc-body m-agent">
+		<p><?php echo esc_html( vlac_opt( 'agent_desc', VLAC_AGENT_DESC ) ); ?></p>
+		<a class="btn btn-red" href="<?php echo esc_url( vlac_agent_url() ); ?>" download>
+			<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+			<?php echo esc_html( vlac_opt( 'agent_btn_txt', 'Descargar agente' ) ); ?>
+		</a>
+		<span class="agent-note"><?php echo esc_html( vlac_agent_note() ); ?></span>
+	</div>
 	<div class="mobile-cta">
 		<a class="btn btn-red btn-lg" href="<?php echo esc_url( vlac_cta_url( 'hdr_cta_url' ) ); ?>"><?php echo esc_html( vlac_opt( 'hdr_cta_txt', 'Prueba gratis' ) ); ?></a>
 	</div>

@@ -10,7 +10,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'VLAC_VERSION' ) ) {
-	define( 'VLAC_VERSION', '1.3.1' );
+	define( 'VLAC_VERSION', '1.4.1' );
+}
+
+// Instalador del Agente de impresión (etiquetadoras e impresoras térmicas).
+// El JSON publica siempre la última versión: {"version":"1.0.4","url":"…/sc-app-1.0.4.exe"}
+if ( ! defined( 'VLAC_AGENT_JSON' ) ) {
+	define( 'VLAC_AGENT_JSON', 'https://images.softcontext.app/softcontext_app/public/agent-version.json' );
+}
+
+// Respaldo por si el JSON no responde.
+if ( ! defined( 'VLAC_AGENT_URL' ) ) {
+	define( 'VLAC_AGENT_URL', 'https://images.softcontext.app/softcontext_app/public/sc-app-1.0.4.exe' );
+}
+
+if ( ! defined( 'VLAC_AGENT_DESC' ) ) {
+	define(
+		'VLAC_AGENT_DESC',
+		'Descarga nuestro agente para conectar tu etiquetadora o impresora térmica con el sistema. Así puedes imprimir desde el teléfono y crear las etiquetas de tu negocio.'
+	);
 }
 
 /**
@@ -166,6 +184,99 @@ function vlac_clients_url() {
 
 	return $url;
 }
+
+/**
+ * Lee el JSON de versión del Agente y devuelve array( 'version', 'url' ).
+ *
+ * El JSON lo publica la API en cada release:
+ *   {"version":"1.0.4","url":"https://…/sc-app-1.0.4.exe"}
+ *
+ * La respuesta se guarda en un transient (1 hora) para no consultar el
+ * servidor en cada visita. Si el JSON falla, se usa el último valor
+ * conocido y, en su defecto, la constante VLAC_AGENT_URL.
+ */
+function vlac_agent_info() {
+	static $info = null;
+	if ( null !== $info ) {
+		return $info;
+	}
+
+	$cached = get_transient( 'vlac_agent_info' );
+	if ( is_array( $cached ) ) {
+		$info = $cached;
+		return $info;
+	}
+
+	$info     = array(
+		'version' => '',
+		'url'     => VLAC_AGENT_URL,
+	);
+	$json_url = vlac_opt( 'agent_json', VLAC_AGENT_JSON );
+
+	if ( $json_url ) {
+		$response = wp_remote_get(
+			$json_url,
+			array(
+				'timeout' => 5,
+				'headers' => array( 'Accept' => 'application/json' ),
+			)
+		);
+
+		if ( ! is_wp_error( $response ) && 200 === wp_remote_retrieve_response_code( $response ) ) {
+			$data = json_decode( wp_remote_retrieve_body( $response ), true );
+
+			if ( is_array( $data ) && ! empty( $data['url'] ) ) {
+				$info['url']     = esc_url_raw( $data['url'] );
+				$info['version'] = isset( $data['version'] ) ? sanitize_text_field( $data['version'] ) : '';
+				// Solo cacheamos una lectura correcta.
+				set_transient( 'vlac_agent_info', $info, HOUR_IN_SECONDS );
+				return $info;
+			}
+		}
+
+		// Si falló, reintentamos en 5 minutos en vez de en una hora.
+		set_transient( 'vlac_agent_info', $info, 5 * MINUTE_IN_SECONDS );
+	}
+
+	return $info;
+}
+
+/**
+ * Enlace de descarga del Agente de impresión (menú «Agente»).
+ * Si el Personalizador tiene un enlace fijo, ese manda; si está vacío,
+ * se toma el del JSON (última versión publicada).
+ */
+function vlac_agent_url() {
+	$manual = vlac_opt( 'agent_url' );
+	if ( $manual ) {
+		return $manual;
+	}
+
+	$info = vlac_agent_info();
+	return $info['url'] ? $info['url'] : VLAC_AGENT_URL;
+}
+
+/**
+ * Nota bajo el botón de descarga; añade la versión detectada en el JSON.
+ */
+function vlac_agent_note() {
+	$note = vlac_opt( 'agent_note', 'Windows · Instalador .exe' );
+	$info = vlac_agent_info();
+
+	if ( ! empty( $info['version'] ) && ! vlac_opt( 'agent_url' ) ) {
+		$note = $note ? $note . ' · v' . $info['version'] : 'v' . $info['version'];
+	}
+
+	return $note;
+}
+
+/**
+ * Al guardar el Personalizador, olvida la versión cacheada del Agente.
+ */
+function vlac_flush_agent_cache() {
+	delete_transient( 'vlac_agent_info' );
+}
+add_action( 'customize_save_after', 'vlac_flush_agent_cache' );
 
 /**
  * Enlace de un botón CTA: usa el valor del Personalizador si tiene algo,
@@ -877,6 +988,12 @@ function vlac_customize_register( $wp_customize ) {
 		'hdr_cta_url'    => array( __( 'Botón rojo — enlace (vacío = página de Contacto)', 'vlac-systems' ), '', 'url' ),
 		'hdr_asesor_txt' => array( __( 'Botón «Hablar con un asesor» (menú Industrias) — texto', 'vlac-systems' ), 'Hablar con un asesor', 'text' ),
 		'hdr_asesor_url' => array( __( 'Botón «Hablar con un asesor» (menú Industrias) — enlace (vacío = Contacto)', 'vlac-systems' ), '', 'url' ),
+		'agent_title'    => array( __( 'Menú «Agente» — título', 'vlac-systems' ), 'Agente de impresión', 'text' ),
+		'agent_desc'     => array( __( 'Menú «Agente» — descripción', 'vlac-systems' ), VLAC_AGENT_DESC, 'textarea' ),
+		'agent_btn_txt'  => array( __( 'Menú «Agente» — texto del botón', 'vlac-systems' ), 'Descargar agente', 'text' ),
+		'agent_json'     => array( __( 'Menú «Agente» — JSON de versión (se lee automáticamente)', 'vlac-systems' ), VLAC_AGENT_JSON, 'url' ),
+		'agent_url'      => array( __( 'Menú «Agente» — enlace fijo del .exe (vacío = usa el JSON)', 'vlac-systems' ), '', 'url' ),
+		'agent_note'     => array( __( 'Menú «Agente» — nota bajo el botón', 'vlac-systems' ), 'Windows · Instalador .exe', 'text' ),
 	);
 	vlac_add_fields( $wp_customize, $header_fields, 'vlac_header' );
 
