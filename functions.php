@@ -10,18 +10,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'VLAC_VERSION' ) ) {
-	define( 'VLAC_VERSION', '1.4.1' );
+	define( 'VLAC_VERSION', '1.4.2' );
 }
 
 // Instalador del Agente de impresión (etiquetadoras e impresoras térmicas).
-// El JSON publica siempre la última versión: {"version":"1.0.4","url":"…/sc-app-1.0.4.exe"}
+// El JSON publica la última versión: {"version":"1.0.5","url":"…/sc-app-1.0.5.exe"}
 if ( ! defined( 'VLAC_AGENT_JSON' ) ) {
 	define( 'VLAC_AGENT_JSON', 'https://images.softcontext.app/softcontext_app/public/agent-version.json' );
 }
 
-// Respaldo por si el JSON no responde.
+// Instalador que viaja dentro del tema (ruta relativa a la carpeta del tema).
+// Es lo que se sirve mientras el bucket no publique el setup.
+if ( ! defined( 'VLAC_AGENT_FILE' ) ) {
+	define( 'VLAC_AGENT_FILE', 'assets/downloads/sc-agent-setup-1.0.5.exe' );
+}
+
+// Misma versión, ya subida al bucket. Se usa si el archivo local no está.
 if ( ! defined( 'VLAC_AGENT_URL' ) ) {
-	define( 'VLAC_AGENT_URL', 'https://images.softcontext.app/softcontext_app/public/sc-app-1.0.4.exe' );
+	define( 'VLAC_AGENT_URL', 'https://images.softcontext.app/softcontext_app/public/sc-agent-setup-1.0.5.exe' );
+}
+
+// El JSON solo manda si anuncia una versión más nueva que esta, así no
+// retrocedemos mientras el JSON se actualiza (hoy todavía dice 1.0.4).
+if ( ! defined( 'VLAC_AGENT_VERSION' ) ) {
+	define( 'VLAC_AGENT_VERSION', '1.0.5' );
 }
 
 if ( ! defined( 'VLAC_AGENT_DESC' ) ) {
@@ -189,7 +201,7 @@ function vlac_clients_url() {
  * Lee el JSON de versión del Agente y devuelve array( 'version', 'url' ).
  *
  * El JSON lo publica la API en cada release:
- *   {"version":"1.0.4","url":"https://…/sc-app-1.0.4.exe"}
+ *   {"version":"1.0.5","url":"https://…/sc-app-1.0.5.exe"}
  *
  * La respuesta se guarda en un transient (1 hora) para no consultar el
  * servidor en cada visita. Si el JSON falla, se usa el último valor
@@ -242,9 +254,34 @@ function vlac_agent_info() {
 }
 
 /**
+ * Instalador a servir: el que viaja en el tema, o el del bucket si no está.
+ * El JSON solo lo reemplaza si su versión supera a VLAC_AGENT_VERSION.
+ * Devuelve array( 'version', 'url' ).
+ */
+function vlac_agent_release() {
+	$local = ( VLAC_AGENT_FILE && file_exists( get_template_directory() . '/' . VLAC_AGENT_FILE ) )
+		? get_template_directory_uri() . '/' . VLAC_AGENT_FILE
+		: '';
+
+	$release = array(
+		'version' => VLAC_AGENT_VERSION,
+		'url'     => $local ? $local : VLAC_AGENT_URL,
+	);
+
+	$info = vlac_agent_info();
+
+	if ( ! empty( $info['url'] ) && ! empty( $info['version'] )
+		&& version_compare( $info['version'], VLAC_AGENT_VERSION, '>' ) ) {
+		$release = $info;
+	}
+
+	return $release;
+}
+
+/**
  * Enlace de descarga del Agente de impresión (menú «Agente»).
  * Si el Personalizador tiene un enlace fijo, ese manda; si está vacío,
- * se toma el del JSON (última versión publicada).
+ * se sirve el instalador de vlac_agent_release().
  */
 function vlac_agent_url() {
 	$manual = vlac_opt( 'agent_url' );
@@ -252,19 +289,24 @@ function vlac_agent_url() {
 		return $manual;
 	}
 
-	$info = vlac_agent_info();
-	return $info['url'] ? $info['url'] : VLAC_AGENT_URL;
+	$release = vlac_agent_release();
+	return $release['url'];
 }
 
 /**
- * Nota bajo el botón de descarga; añade la versión detectada en el JSON.
+ * Nota bajo el botón de descarga; añade la versión del instalador servido.
  */
 function vlac_agent_note() {
 	$note = vlac_opt( 'agent_note', 'Windows · Instalador .exe' );
-	$info = vlac_agent_info();
 
-	if ( ! empty( $info['version'] ) && ! vlac_opt( 'agent_url' ) ) {
-		$note = $note ? $note . ' · v' . $info['version'] : 'v' . $info['version'];
+	if ( vlac_opt( 'agent_url' ) ) {
+		return $note;
+	}
+
+	$release = vlac_agent_release();
+
+	if ( ! empty( $release['version'] ) ) {
+		$note = $note ? $note . ' · v' . $release['version'] : 'v' . $release['version'];
 	}
 
 	return $note;
