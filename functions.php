@@ -493,6 +493,42 @@ function vlac_customize_register( $wp_customize ) {
 	);
 	vlac_add_video_fields( $wp_customize, $con_videos, 'vlac_con' );
 
+	/* ---------- Página Control de Asistencia (Control iD) ---------- */
+	$wp_customize->add_section(
+		'vlac_cid',
+		array(
+			'title' => __( 'Página Control de Asistencia', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$cid_fields = array(
+		'cid_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Control de Asistencia · Control iD', 'text' ),
+		'cid_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'El <span class="accent">marcaje</span> de tu personal, conectado a la <span class="accent">nómina</span>', 'html' ),
+		'cid_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Integramos el lector facial Control iD idFace con tu sistema: los usuarios se sincronizan solos, cada entrada y salida queda registrada, y las horas trabajadas se comparan con la jornada del contrato.', 'textarea' ),
+		'cid_dev_kicker' => array( __( 'Aparato · Etiqueta', 'vlac-systems' ), 'Aparato compatible', 'text' ),
+		'cid_dev_title'  => array( __( 'Aparato · Título', 'vlac-systems' ), 'Control iD idFace', 'text' ),
+		'cid_dev_sub'    => array( __( 'Aparato · Descripción', 'vlac-systems' ), 'Terminal de reconocimiento facial que identifica al trabajador en menos de un segundo. Se coloca en la entrada, alterna entrada y salida solo, y le avisa al sistema cada marcaje.', 'textarea' ),
+		'cid_dev_url'    => array( __( 'Aparato · Enlace a la ficha del fabricante', 'vlac-systems' ), 'https://www.controlid.com.br/es/control-de-acceso/idface/', 'url' ),
+		'cid_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Deja de contar horas a mano', 'text' ),
+		'cid_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Conecta tu lector Control iD, sincroniza a tu personal y que la nómina se calcule sola.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $cid_fields, 'vlac_cid' );
+
+	$cid_images = array(
+		'cid_img_hero'      => __( 'Hero · Imagen destacada (opcional)', 'vlac-systems' ),
+		'cid_img_sync'      => __( 'Sincronizar usuarios con el aparato', 'vlac-systems' ),
+		'cid_img_aparatos'  => __( 'Aparatos registrados y su configuración', 'vlac-systems' ),
+		'cid_img_registros' => __( 'Registros de horario (marcajes)', 'vlac-systems' ),
+		'cid_img_contrato'  => __( 'Contrato de trabajo con la jornada', 'vlac-systems' ),
+		'cid_img_nomina'    => __( 'Nómina con horas trabajadas', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $cid_images, 'vlac_cid' );
+
+	$cid_videos = array(
+		'cid_video_marcaje' => __( 'Video · Marcaje en el aparato', 'vlac-systems' ),
+	);
+	vlac_add_video_fields( $wp_customize, $cid_videos, 'vlac_cid' );
+
 	/* ---------- Página Compras y Proveedores ---------- */
 	$wp_customize->add_section(
 		'vlac_cp',

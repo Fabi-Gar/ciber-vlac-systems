@@ -44,6 +44,23 @@ Ve a **Apariencia → Personalizar → Contenido de la portada**. Podrás editar
 
 **Menús del pie de página:** en **Apariencia → Menús** puedes asignar menús a las áreas *Footer — Producto*, *Footer — Industrias* y *Footer — Empresa*. Si no asignas ninguno, se muestran los enlaces por defecto.
 
+## Página «Control de asistencia y nómina» (Control iD)
+
+Plantilla `page-control-de-asistencia.php`. Cubre la integración con el lector facial
+**Control iD idFace**: sincronización de los usuarios del sistema con el aparato, registros
+de horario, contratos con jornada semanal y el cálculo de horas dentro de la nómina.
+
+1. **Páginas → Añadir nueva**, título «Control de asistencia», slug **`control-de-asistencia`**
+   (el menú «Aplicaciones → Administración» ya apunta ahí).
+2. En **Atributos de página → Plantilla** elige *Control de Asistencia y Nómina*.
+3. Los textos, imágenes y videos se editan en **Personalizar → Contenido del sitio →
+   Página Control de Asistencia**.
+
+Si prefieres subir los archivos al tema en vez de usar el Personalizador, los nombres son
+`cid-sync.png`, `cid-aparatos.png`, `cid-registros.png`, `cid-contrato.png`, `cid-nomina.png`
+y `cid-hero.png` (opcional) en `assets/img/`, más `controlid-marcaje.mp4` en `assets/video/`.
+Mientras falten, la página muestra un marcador con las instrucciones.
+
 ## Notas técnicas
 
 - El **mega-menú de "Industrias"** y las secciones de *features* e *industrias* están escritos directamente en las plantillas (`header.php` y `front-page.php`) para conservar los iconos SVG y el diseño exacto. Puedes editar sus textos y enlaces ahí.

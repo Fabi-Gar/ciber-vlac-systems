@@ -76,6 +76,7 @@
 								<h5>Administración</h5>
 								<a href="<?php echo esc_url( home_url( '/usuarios/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M2 21a7 7 0 0114 0M16 11l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Gestión de usuarios</a>
 								<a href="<?php echo esc_url( home_url( '/sucursales/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 21V9l9-6 9 6v12M3 21h18M9 21v-6h6v6M7 12h.01M12 12h.01M17 12h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Múltiples sucursales</a>
+								<a href="<?php echo esc_url( home_url( '/control-de-asistencia/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M7 18a5 5 0 0110 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Control de asistencia y nómina</a>
 							</div>
 						</div>
 						<div class="mega-foot">
@@ -166,7 +167,7 @@
 		<h6>Finanzas e informes</h6>
 		<a href="<?php echo esc_url( home_url( '/financiera/' ) ); ?>">Gestión financiera</a><a href="<?php echo esc_url( home_url( '/informes/' ) ); ?>">Informes</a>
 		<h6>Administración</h6>
-		<a href="<?php echo esc_url( home_url( '/usuarios/' ) ); ?>">Gestión de usuarios</a><a href="<?php echo esc_url( home_url( '/sucursales/' ) ); ?>">Múltiples sucursales</a>
+		<a href="<?php echo esc_url( home_url( '/usuarios/' ) ); ?>">Gestión de usuarios</a><a href="<?php echo esc_url( home_url( '/sucursales/' ) ); ?>">Múltiples sucursales</a><a href="<?php echo esc_url( home_url( '/control-de-asistencia/' ) ); ?>">Control de asistencia y nómina</a>
 	</div>
 	<button class="m-acc-head" id="mAcc">Industrias
 		<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
