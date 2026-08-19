@@ -1341,3 +1341,81 @@ function vlac_primary_fallback() {
 	}
 	echo '</div>';
 }
+
+/* -------------------------------------------------------------------------
+ * SEO — Sitemap XML (wp-sitemap.xml) e indexación
+ * ---------------------------------------------------------------------- */
+
+/**
+ * Quita del sitemap el listado de autores (wp-sitemap-users-1.xml): no aporta
+ * nada al SEO del sitio y expone los nombres de usuario del panel.
+ *
+ * @param WP_Sitemaps_Provider $provider Proveedor del sitemap.
+ * @param string               $name     Nombre del proveedor.
+ * @return WP_Sitemaps_Provider|false
+ */
+function vlac_sitemap_providers( $provider, $name ) {
+	if ( 'users' === $name ) {
+		return false;
+	}
+
+	return $provider;
+}
+add_filter( 'wp_sitemaps_add_provider', 'vlac_sitemap_providers', 10, 2 );
+
+/**
+ * Deja fuera del sitemap las taxonomías del blog (categorías y etiquetas),
+ * que sólo generan URLs vacías o duplicadas.
+ *
+ * @param array $taxonomies Taxonomías incluidas.
+ * @return array
+ */
+function vlac_sitemap_taxonomies( $taxonomies ) {
+	unset( $taxonomies['category'], $taxonomies['post_tag'] );
+
+	return $taxonomies;
+}
+add_filter( 'wp_sitemaps_taxonomies', 'vlac_sitemap_taxonomies' );
+
+/**
+ * Marca como «noindex» los archivos que no deben competir con las páginas
+ * reales del sitio (autor, fechas, búsqueda, adjuntos y 404).
+ *
+ * @param array $robots Directivas robots.
+ * @return array
+ */
+function vlac_robots_noindex( $robots ) {
+	if ( is_author() || is_date() || is_search() || is_attachment() || is_404() ) {
+		return wp_robots_no_robots( $robots );
+	}
+
+	return $robots;
+}
+add_filter( 'wp_robots', 'vlac_robots_noindex' );
+
+/**
+ * Icono de la pestaña (favicon) de respaldo.
+ *
+ * WordPress sólo imprime el icono cuando se ha subido uno en «Identidad del
+ * sitio»; si no, el navegador muestra el logo genérico de WordPress. Aquí se
+ * usa el logo del sitio —o el del tema— mientras no haya icono propio.
+ */
+function vlac_favicon_fallback() {
+	if ( has_site_icon() ) {
+		return; // El núcleo ya imprime las etiquetas del icono.
+	}
+
+	$icon = get_template_directory_uri() . '/assets/img/logo.png';
+
+	if ( has_custom_logo() ) {
+		$src = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
+		if ( $src ) {
+			$icon = $src[0];
+		}
+	}
+
+	printf( '<link rel="icon" href="%s" sizes="any">' . "\n", esc_url( $icon ) );
+	printf( '<link rel="apple-touch-icon" href="%s">' . "\n", esc_url( $icon ) );
+}
+add_action( 'wp_head', 'vlac_favicon_fallback', 5 );
+add_action( 'admin_head', 'vlac_favicon_fallback', 5 );

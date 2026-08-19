@@ -72,3 +72,29 @@ Mientras falten, la página muestra un marcador con las instrucciones.
 
 Reemplaza los archivos en `assets/img/` manteniendo los mismos nombres:
 `logo.png`, `hero-monitor.jpg`, `hero-tablet.png`, `hero-phone.png`, `floor-map.png`.
+
+## Sitemap y SEO
+
+El sitemap (`https://vlac.systems/wp-sitemap.xml`) lo genera el propio WordPress.
+El tema sólo lo recorta: quita `wp-sitemap-users-1.xml` (autores) y las taxonomías
+del blog (categorías y etiquetas), y marca como *noindex* los archivos de autor,
+fecha, búsqueda, adjuntos y 404.
+
+Lo que **no** se arregla desde el tema (es contenido, va en el panel):
+
+1. **Entradas → Todas** → enviar «¡Hola, mundo!» (`/2026/06/26/hello-world/`) a la
+   papelera y **vaciar la papelera**. Al no quedar entradas publicadas, WordPress
+   deja de generar `wp-sitemap-posts-post-1.xml`.
+2. **Páginas** → borrar también «Página de ejemplo» si sigue ahí.
+3. **Search Console → Sitemaps** → añadir `wp-sitemap.xml` para que deje de decir
+   *«No referring sitemaps detected»*.
+
+## Icono de la pestaña (favicon)
+
+Lo correcto es subirlo en **Apariencia → Personalizar → Identidad del sitio →
+Icono del sitio** (imagen cuadrada, mínimo 512×512 px). WordPress genera ahí
+todos los tamaños que piden los navegadores y los dispositivos móviles.
+
+Mientras no haya un icono propio, el tema imprime como respaldo el logo del
+sitio, y si tampoco hay, `assets/img/logo.png` (256×256). Así nunca se ve el
+logo genérico de WordPress en la pestaña.
