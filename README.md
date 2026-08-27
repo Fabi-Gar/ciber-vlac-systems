@@ -73,6 +73,10 @@ Mientras falten, la página muestra un marcador con las instrucciones.
 Reemplaza los archivos en `assets/img/` manteniendo los mismos nombres:
 `logo.png`, `hero-monitor.jpg`, `hero-tablet.png`, `hero-phone.png`, `floor-map.png`.
 
+`logo.png` (256×256) es el logo visible de la cabecera y el pie cuando no hay
+uno subido en el Personalizador; los iconos de pestaña y de app son aparte, en
+`assets/img/icons/`.
+
 ## Sitemap y SEO
 
 El sitemap (`https://vlac.systems/wp-sitemap.xml`) lo genera el propio WordPress.
@@ -95,6 +99,20 @@ Lo correcto es subirlo en **Apariencia → Personalizar → Identidad del sitio 
 Icono del sitio** (imagen cuadrada, mínimo 512×512 px). WordPress genera ahí
 todos los tamaños que piden los navegadores y los dispositivos móviles.
 
-Mientras no haya un icono propio, el tema imprime como respaldo el logo del
-sitio, y si tampoco hay, `assets/img/logo.png` (256×256). Así nunca se ve el
-logo genérico de WordPress en la pestaña.
+Mientras no haya un icono propio, el tema imprime como respaldo los archivos de
+`assets/img/icons/` (`favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png` y
+`apple-touch-icon.png`, de 180×180). Así nunca se ve el logo genérico de
+WordPress en la pestaña.
+
+## Instalación en Android (web app manifest)
+
+WordPress no genera ningún *web app manifest*, así que lo sirve el tema en
+`https://vlac.systems/?vlac_manifest=1`, enlazado desde la cabecera con
+`<link rel="manifest">`. Se genera desde PHP para que tome el nombre, el idioma
+y la URL reales del sitio; los iconos salen del **Icono del sitio** si está
+puesto, y si no de `assets/img/icons/android-chrome-192x192.png` y
+`android-chrome-512x512.png`.
+
+En **Apariencia → Personalizar → Identidad del sitio** se editan el *nombre
+corto en el móvil* (el que aparece bajo el icono, máx. 12 caracteres) y el
+*color de la barra en el móvil*.

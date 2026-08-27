@@ -1147,6 +1147,33 @@ function vlac_customize_register( $wp_customize ) {
 		'foot_legal'  => array( __( 'Texto legal derecho', 'vlac-systems' ), 'Guatemala · Certificado ante la SAT', 'text' ),
 	);
 	vlac_add_fields( $wp_customize, $footer_fields, 'vlac_footer' );
+
+	/* ---------- Aplicación móvil (manifest) ---------- */
+	// Se añade a «Identidad del sitio», junto al Icono del sitio, porque de ahí
+	// salen también los iconos que usa Android al instalar la página.
+	$app_fields = array(
+		'app_short_name' => array( __( 'Nombre corto en el móvil (máx. 12 caracteres)', 'vlac-systems' ), 'Vlac Systems', 'text' ),
+	);
+	vlac_add_fields( $wp_customize, $app_fields, 'title_tagline' );
+
+	$wp_customize->add_setting(
+		'app_theme_color',
+		array(
+			'default'           => '#C1272D',
+			'sanitize_callback' => 'sanitize_hex_color',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'app_theme_color',
+			array(
+				'label'       => __( 'Color de la barra en el móvil', 'vlac-systems' ),
+				'description' => __( 'Tiñe la barra superior del navegador en Android y la ventana al instalar el sitio.', 'vlac-systems' ),
+				'section'     => 'title_tagline',
+			)
+		)
+	);
 }
 add_action( 'customize_register', 'vlac_customize_register' );
 
@@ -1398,24 +1425,109 @@ add_filter( 'wp_robots', 'vlac_robots_noindex' );
  *
  * WordPress sólo imprime el icono cuando se ha subido uno en «Identidad del
  * sitio»; si no, el navegador muestra el logo genérico de WordPress. Aquí se
- * usa el logo del sitio —o el del tema— mientras no haya icono propio.
+ * usan los iconos del tema mientras no haya icono propio.
+ *
+ * Los archivos de /assets/img/icons/ están generados a los tamaños exactos que
+ * pide cada dispositivo, así que dan mejor resultado que reescalar el logo.
  */
 function vlac_favicon_fallback() {
 	if ( has_site_icon() ) {
 		return; // El núcleo ya imprime las etiquetas del icono.
 	}
 
-	$icon = get_template_directory_uri() . '/assets/img/logo.png';
+	$icons = get_template_directory_uri() . '/assets/img/icons';
 
-	if ( has_custom_logo() ) {
-		$src = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
-		if ( $src ) {
-			$icon = $src[0];
-		}
-	}
-
-	printf( '<link rel="icon" href="%s" sizes="any">' . "\n", esc_url( $icon ) );
-	printf( '<link rel="apple-touch-icon" href="%s">' . "\n", esc_url( $icon ) );
+	printf( '<link rel="icon" href="%s" sizes="16x16 32x32">' . "\n", esc_url( $icons . '/favicon.ico' ) );
+	printf( '<link rel="icon" type="image/png" sizes="32x32" href="%s">' . "\n", esc_url( $icons . '/favicon-32x32.png' ) );
+	printf( '<link rel="icon" type="image/png" sizes="16x16" href="%s">' . "\n", esc_url( $icons . '/favicon-16x16.png' ) );
+	printf( '<link rel="apple-touch-icon" sizes="180x180" href="%s">' . "\n", esc_url( $icons . '/apple-touch-icon.png' ) );
 }
 add_action( 'wp_head', 'vlac_favicon_fallback', 5 );
 add_action( 'admin_head', 'vlac_favicon_fallback', 5 );
+
+/**
+ * Manifiesto de aplicación web (Android / Chrome).
+ *
+ * WordPress no genera ningún «web app manifest», así que el tema lo sirve.
+ * Se entrega desde PHP —y no como archivo estático— para que respete el
+ * nombre del sitio, el icono elegido en «Identidad del sitio» y la URL real
+ * de la instalación, sin necesidad de tocar código si algo de eso cambia.
+ *
+ * Se usa una variable de consulta en lugar de una regla de reescritura para
+ * no depender de un vaciado de enlaces permanentes al activar el tema.
+ */
+function vlac_manifest_query_var( $vars ) {
+	$vars[] = 'vlac_manifest';
+	return $vars;
+}
+add_filter( 'query_vars', 'vlac_manifest_query_var' );
+
+/**
+ * URL del manifiesto.
+ */
+function vlac_manifest_url() {
+	return add_query_arg( 'vlac_manifest', '1', home_url( '/' ) );
+}
+
+/**
+ * Iconos de la aplicación: los del Personalizador si hay «Icono del sitio»,
+ * y si no los que trae el tema.
+ */
+function vlac_app_icon( $size ) {
+	if ( has_site_icon() ) {
+		return get_site_icon_url( $size );
+	}
+
+	$file = ( 512 === $size ) ? 'android-chrome-512x512.png' : 'android-chrome-192x192.png';
+
+	return get_template_directory_uri() . '/assets/img/icons/' . $file;
+}
+
+/**
+ * Imprime el manifiesto en JSON cuando se pide su URL.
+ */
+function vlac_render_manifest() {
+	if ( ! get_query_var( 'vlac_manifest' ) ) {
+		return;
+	}
+
+	$manifest = array(
+		'id'               => home_url( '/' ),
+		'name'             => get_bloginfo( 'name' ),
+		'short_name'       => vlac_opt( 'app_short_name', 'Vlac Systems' ),
+		'description'      => get_bloginfo( 'description' ),
+		'lang'             => get_bloginfo( 'language' ),
+		'dir'              => is_rtl() ? 'rtl' : 'ltr',
+		'start_url'        => home_url( '/' ),
+		'scope'            => home_url( '/' ),
+		'display'          => 'standalone',
+		'theme_color'      => vlac_opt( 'app_theme_color', '#C1272D' ),
+		'background_color' => '#FFFFFF',
+		'icons'            => array(
+			array(
+				'src'   => vlac_app_icon( 192 ),
+				'sizes' => '192x192',
+				'type'  => 'image/png',
+			),
+			array(
+				'src'   => vlac_app_icon( 512 ),
+				'sizes' => '512x512',
+				'type'  => 'image/png',
+			),
+		),
+	);
+
+	header( 'Content-Type: application/manifest+json; charset=' . get_bloginfo( 'charset' ) );
+	echo wp_json_encode( $manifest, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+	exit;
+}
+add_action( 'template_redirect', 'vlac_render_manifest', 0 );
+
+/**
+ * Etiquetas del manifiesto en la cabecera.
+ */
+function vlac_manifest_link() {
+	printf( '<link rel="manifest" href="%s">' . "\n", esc_url( vlac_manifest_url() ) );
+	printf( '<meta name="theme-color" content="%s">' . "\n", esc_attr( vlac_opt( 'app_theme_color', '#C1272D' ) ) );
+}
+add_action( 'wp_head', 'vlac_manifest_link', 6 );
