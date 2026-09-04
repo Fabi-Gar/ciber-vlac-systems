@@ -148,6 +148,14 @@
 			</div>
 
 			<div class="nav-right">
+				<div class="nav-search" id="navSearch">
+					<button class="search-toggle" id="searchToggle" aria-label="<?php esc_attr_e( 'Buscar en el sitio', 'vlac-systems' ); ?>" aria-expanded="false" aria-controls="searchDrop">
+						<svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.9"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+					</button>
+					<div class="search-drop" id="searchDrop">
+						<?php get_search_form(); ?>
+					</div>
+				</div>
 				<a class="btn btn-red" href="<?php echo esc_url( vlac_cta_url( 'hdr_cta_url' ) ); ?>"><?php echo esc_html( vlac_opt( 'hdr_cta_txt', 'Prueba gratis' ) ); ?></a>
 			</div>
 			<button class="burger" id="burger" aria-label="<?php esc_attr_e( 'Abrir menú', 'vlac-systems' ); ?>" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -157,6 +165,7 @@
 
 <!-- MOBILE PANEL -->
 <div class="mobile-panel" id="mobilePanel">
+	<div class="m-search"><?php get_search_form(); ?></div>
 	<button class="m-acc-head" aria-expanded="false">Aplicaciones
 		<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 	</button>

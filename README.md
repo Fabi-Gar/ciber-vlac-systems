@@ -84,6 +84,22 @@ El panel de ventas (Nueva venta → Preparación → En camino → Entregado) es
 en HTML y CSS dentro de la plantilla, no es una captura: así se ve siempre lleno y se
 adapta a móvil.
 
+## Buscador del sitio
+
+En la cabecera hay una lupa que abre el campo de búsqueda; en móvil el buscador
+aparece arriba del todo dentro del panel del menú (la lupa se oculta ahí para no
+apretar la barra). Los resultados se muestran con `search.php`, y el formulario
+vive en `searchform.php`, así que sale igual en los tres sitios donde aparece.
+
+La búsqueda se limita a **páginas y entradas** desde `vlac_search_only_content()`
+en `functions.php`: sin ese filtro WordPress también devuelve adjuntos de la
+biblioteca de medios, que no son contenido que el visitante quiera abrir.
+
+Como las páginas del tema no tienen contenido propio (todo va en la plantilla),
+los resultados salen por **título**. Si quieres que una página se encuentre por
+más palabras, escríbelas en el editor de esa página: aparecerán como extracto
+bajo el título en los resultados.
+
 ## Notas técnicas
 
 - El **mega-menú de "Industrias"** y las secciones de *features* e *industrias* están escritos directamente en las plantillas (`header.php` y `front-page.php`) para conservar los iconos SVG y el diseño exacto. Puedes editar sus textos y enlaces ahí.

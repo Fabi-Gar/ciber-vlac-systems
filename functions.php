@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'VLAC_VERSION' ) ) {
-	define( 'VLAC_VERSION', '1.4.2' );
+	define( 'VLAC_VERSION', '1.5.0' );
 }
 
 // Instalador del Agente de impresión (etiquetadoras e impresoras térmicas).
@@ -1450,6 +1450,23 @@ function vlac_robots_noindex( $robots ) {
 	return $robots;
 }
 add_filter( 'wp_robots', 'vlac_robots_noindex' );
+
+/**
+ * Afina los resultados del buscador.
+ *
+ * Por defecto WordPress también devuelve adjuntos de la biblioteca de medios,
+ * que en este sitio no son contenido que el visitante quiera abrir. Aquí la
+ * búsqueda se limita a páginas y entradas, que es donde está todo el tema.
+ */
+function vlac_search_only_content( $query ) {
+	if ( is_admin() || ! $query->is_main_query() || ! $query->is_search() ) {
+		return;
+	}
+
+	$query->set( 'post_type', array( 'page', 'post' ) );
+	$query->set( 'posts_per_page', 10 );
+}
+add_action( 'pre_get_posts', 'vlac_search_only_content' );
 
 /**
  * Icono de la pestaña (favicon) de respaldo.

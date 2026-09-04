@@ -266,6 +266,7 @@ Tags: business, landing-page, custom-menu, custom-logo, translation-ready
   @media (max-width:1000px){
     .menu,.nav-right .link-plain{display:none;}
     .nav-right .btn-red{display:none;}
+    .nav-search{display:none;}
     .burger{display:block;}
     .hero-grid{grid-template-columns:1fr;gap:64px;padding:52px 0 80px;}
     .montage{max-width:580px;margin:0 auto;}
@@ -281,6 +282,7 @@ Tags: business, landing-page, custom-menu, custom-logo, translation-ready
     .m-acc-body.open{display:block;}
     .m-acc-body h6{font-family:'Manrope';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:14px 0 6px;font-weight:700;}
     .m-acc-body a{display:block;color:var(--ink);font-size:15px;padding:8px 4px;}
+    .m-search{display:block;padding-bottom:16px;border-bottom:1px solid var(--line-soft);margin-bottom:10px;}
     .m-agent p{font-size:15px;line-height:1.55;color:var(--muted);padding:6px 4px 0;margin-bottom:14px;}
     .m-agent .btn{display:inline-flex;width:100%;color:#fff;font-size:16px;padding:14px 20px;}
     .m-agent .agent-note{padding:0 4px;}
@@ -311,3 +313,27 @@ Tags: business, landing-page, custom-menu, custom-logo, translation-ready
   .page-content h1,.page-content h2,.page-content h3{margin:1.2em 0 .5em;}
   .page-content p{margin:0 0 1em;color:var(--ink);}
   .page-content a{color:var(--red);text-decoration:underline;}
+
+  /* ---- Buscador del sitio ---- */
+  .vlac-search{position:relative;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:6px 6px 6px 40px;transition:border-color .16s ease,box-shadow .16s ease;}
+  .vlac-search:focus-within{border-color:var(--red);box-shadow:0 0 0 3px rgba(193,39,45,.10);}
+  .vlac-search-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  .vlac-search-ic{position:absolute;left:13px;top:50%;transform:translateY(-50%);display:block;color:var(--muted);pointer-events:none;}
+  .vlac-search-ic svg{width:17px;height:17px;display:block;}
+  .vlac-search-input{flex:1;min-width:0;border:none;outline:none;background:none;font-family:'Inter',system-ui,sans-serif;font-size:15px;color:var(--ink-strong);padding:8px 0;}
+  .vlac-search-input::placeholder{color:var(--muted);}
+  .vlac-search-input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;}
+  .vlac-search-btn{flex:none;background:var(--red);color:#fff;border:none;border-radius:8px;font-family:'Manrope',system-ui,sans-serif;font-weight:700;font-size:14px;padding:9px 16px;cursor:pointer;transition:background .16s ease;}
+  .vlac-search-btn:hover{background:var(--red-dark);}
+
+  /* Lupa de la cabecera y su desplegable */
+  .nav-search{position:relative;}
+  .search-toggle{display:grid;place-items:center;width:42px;height:42px;background:#fff;border:1px solid var(--line);border-radius:10px;color:var(--ink-strong);cursor:pointer;transition:border-color .16s ease,color .16s ease;}
+  .search-toggle:hover,.search-toggle[aria-expanded="true"]{border-color:var(--red);color:var(--red);}
+  .search-toggle svg{width:19px;height:19px;display:block;}
+  .search-drop{display:none;position:absolute;top:calc(100% + 12px);right:0;width:380px;max-width:calc(100vw - 40px);background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lg);padding:14px;z-index:70;}
+  .nav-search.open .search-drop{display:block;}
+  .search-drop .vlac-search{border-color:var(--line-soft);background:var(--bg-alt);}
+
+  /* Buscador del panel móvil */
+  .m-search{display:none;margin-bottom:6px;}

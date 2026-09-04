@@ -25,6 +25,43 @@
 		} );
 	}
 
+	// Buscador de la cabecera: la lupa abre y cierra el desplegable.
+	var searchWrap   = document.getElementById( 'navSearch' );
+	var searchToggle = document.getElementById( 'searchToggle' );
+
+	if ( searchWrap && searchToggle ) {
+		var closeSearch = function () {
+			searchWrap.classList.remove( 'open' );
+			searchToggle.setAttribute( 'aria-expanded', 'false' );
+		};
+
+		searchToggle.addEventListener( 'click', function ( e ) {
+			e.stopPropagation();
+			var open = searchWrap.classList.toggle( 'open' );
+			searchToggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+
+			if ( open ) {
+				var field = searchWrap.querySelector( '.vlac-search-input' );
+				if ( field ) {
+					field.focus();
+				}
+			}
+		} );
+
+		// Cerrar al hacer clic fuera o al pulsar Escape.
+		document.addEventListener( 'click', function ( e ) {
+			if ( ! searchWrap.contains( e.target ) ) {
+				closeSearch();
+			}
+		} );
+
+		document.addEventListener( 'keydown', function ( e ) {
+			if ( 'Escape' === e.key ) {
+				closeSearch();
+			}
+		} );
+	}
+
 	// Acordeones del panel móvil (Aplicaciones, Industrias, …).
 	document.querySelectorAll( '.m-acc-head' ).forEach( function ( head ) {
 		var body = head.nextElementSibling;
