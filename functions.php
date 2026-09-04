@@ -1133,6 +1133,37 @@ function vlac_customize_register( $wp_customize ) {
 		)
 	);
 
+	/* ---------- Página Venta en Línea ---------- */
+	$wp_customize->add_section(
+		'vlac_vlo',
+		array(
+			'title' => __( 'Página Venta en Línea', 'vlac-systems' ),
+			'panel' => 'vlac_home',
+		)
+	);
+	$vlo_fields = array(
+		'vlo_eyebrow'   => array( __( 'Etiqueta superior', 'vlac-systems' ), 'Venta en Línea', 'text' ),
+		'vlo_title'     => array( __( 'Título (permite HTML con <span class="accent">)', 'vlac-systems' ), 'Tu <span class="accent">tienda en línea</span>, conectada a tu inventario', 'html' ),
+		'vlo_sub'       => array( __( 'Subtítulo', 'vlac-systems' ), 'Publica tus productos con un clic desde el mismo sistema donde llevas el inventario. Tus clientes compran en línea y los pedidos entran directo a tu panel de ventas.', 'textarea' ),
+		'vlo_cta_title' => array( __( 'CTA final · Título', 'vlac-systems' ), 'Abre tu tienda en línea esta semana', 'text' ),
+		'vlo_cta_sub'   => array( __( 'CTA final · Subtítulo', 'vlac-systems' ), 'Si ya tienes tus productos en el sistema, publicarlos en línea es cuestión de marcarlos.', 'textarea' ),
+	);
+	vlac_add_fields( $wp_customize, $vlo_fields, 'vlac_vlo' );
+
+	$vlo_images = array(
+		'vlo_img_hero'       => __( 'Hero · Imagen destacada (opcional)', 'vlac-systems' ),
+		'vlo_img_tablet'     => __( 'Hero · Tablet', 'vlac-systems' ),
+		'vlo_img_phone'      => __( 'Hero · Teléfono', 'vlac-systems' ),
+		'vlo_img_tienda'     => __( 'Portada de la tienda (banner)', 'vlac-systems' ),
+		'vlo_img_categorias' => __( 'Publicación de categorías', 'vlac-systems' ),
+		'vlo_img_productos'  => __( 'Publicación de productos', 'vlac-systems' ),
+		'vlo_img_catalogo'   => __( 'Catálogo con filtros', 'vlac-systems' ),
+		'vlo_img_config'     => __( 'Configuraciones de la tienda', 'vlac-systems' ),
+		'vlo_img_destacados' => __( 'Productos más buscados', 'vlac-systems' ),
+		'vlo_img_carrito'    => __( 'Carrito y resumen del pedido', 'vlac-systems' ),
+	);
+	vlac_add_image_fields( $wp_customize, $vlo_images, 'vlac_vlo' );
+
 	/* ---------- Footer ---------- */
 	$wp_customize->add_section(
 		'vlac_footer',

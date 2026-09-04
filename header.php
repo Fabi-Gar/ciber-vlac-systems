@@ -61,6 +61,7 @@
 								<a href="<?php echo esc_url( home_url( '/facturacion/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M6 3h9l3 3v15l-2-1.4L14 21l-2-1.4L10 21l-2-1.4L6 21V3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8h6M9 12h6M9 16h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Facturador FEL</a>
 								<a href="<?php echo esc_url( home_url( '/ventas-clientes/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Gestión de ventas y clientes</a>
 								<a href="<?php echo esc_url( home_url( '/contratos/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M4 20h16M6 16l8-8 3 3-8 8H6v-3z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Gestión de contratos</a>
+								<a href="<?php echo esc_url( home_url( '/venta-en-linea/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 6h18l-1.5 9h-13L3 6zM3 6L2.4 3.5H1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="19" r="1.5" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="19" r="1.5" stroke="currentColor" stroke-width="1.6"/></svg>Venta en línea</a>
 							</div>
 							<div class="mega-col">
 								<h5>Compras e inventario</h5>
@@ -161,7 +162,7 @@
 	</button>
 	<div class="m-acc-body">
 		<h6>Facturación y ventas</h6>
-		<a href="<?php echo esc_url( home_url( '/facturacion/' ) ); ?>">Facturador FEL</a><a href="<?php echo esc_url( home_url( '/ventas-clientes/' ) ); ?>">Gestión de ventas y clientes</a><a href="<?php echo esc_url( home_url( '/contratos/' ) ); ?>">Gestión de contratos</a>
+		<a href="<?php echo esc_url( home_url( '/facturacion/' ) ); ?>">Facturador FEL</a><a href="<?php echo esc_url( home_url( '/ventas-clientes/' ) ); ?>">Gestión de ventas y clientes</a><a href="<?php echo esc_url( home_url( '/contratos/' ) ); ?>">Gestión de contratos</a><a href="<?php echo esc_url( home_url( '/venta-en-linea/' ) ); ?>">Venta en línea</a>
 		<h6>Compras e inventario</h6>
 		<a href="<?php echo esc_url( home_url( '/compras-proveedores/' ) ); ?>">Gestión de compras y proveedores</a><a href="<?php echo esc_url( home_url( '/inventario/' ) ); ?>">Gestión de inventario y productos</a>
 		<h6>Finanzas e informes</h6>

@@ -61,6 +61,29 @@ Si prefieres subir los archivos al tema en vez de usar el Personalizador, los no
 y `cid-hero.png` (opcional) en `assets/img/`, más `controlid-marcaje.mp4` en `assets/video/`.
 Mientras falten, la página muestra un marcador con las instrucciones.
 
+## Página «Venta en línea» (tienda SoftShop)
+
+Plantilla `page-venta-en-linea.php`. Cubre el módulo de **Venta en Línea**: publicar
+categorías y productos desde el ERP, armar la vitrina con banners y secciones,
+configurar la identidad de la tienda, definir entrega a domicilio y retiro en tienda,
+y atender los pedidos en el panel de ventas.
+
+1. **Páginas → Añadir nueva**, título «Venta en línea», slug **`venta-en-linea`**
+   (el menú «Aplicaciones → Facturación y ventas» ya apunta ahí).
+2. En **Atributos de página → Plantilla** elige *Venta en Línea (Tienda)*.
+3. Los textos y las imágenes se editan en **Personalizar → Contenido del sitio →
+   Página Venta en Línea**.
+
+Si prefieres subir las capturas al tema en vez de usar el Personalizador, los nombres
+en `assets/img/` son `vlo-tienda.png`, `vlo-config.png`, `vlo-categorias.png`,
+`vlo-productos.png`, `vlo-destacados.png`, `vlo-catalogo.png`, `vlo-carrito.png`,
+más `vlo-tablet.png` y `vlo-phone.png` para el hero (y `vlo-hero.png`, opcional).
+Mientras falten, la página muestra un marcador con las instrucciones.
+
+El panel de ventas (Nueva venta → Preparación → En camino → Entregado) está dibujado
+en HTML y CSS dentro de la plantilla, no es una captura: así se ve siempre lleno y se
+adapta a móvil.
+
 ## Notas técnicas
 
 - El **mega-menú de "Industrias"** y las secciones de *features* e *industrias* están escritos directamente en las plantillas (`header.php` y `front-page.php`) para conservar los iconos SVG y el diseño exacto. Puedes editar sus textos y enlaces ahí.
