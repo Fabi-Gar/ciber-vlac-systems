@@ -11,7 +11,7 @@
  * interna y la que ve el cliente, y los formatos de impresión y entrega.
  *
  * Se aplica automáticamente a la página con slug «talleres»
- * (el menú del tema ya apunta a /industrias/talleres/), o puede asignarse
+ * (el menú del tema la enlaza por slug con vlac_page_url), o puede asignarse
  * a mano desde Atributos de página → Plantilla.
  *
  * IMÁGENES (guárdalas en /assets/img/ con estos nombres exactos, o mejor

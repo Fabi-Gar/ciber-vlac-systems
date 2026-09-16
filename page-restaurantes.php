@@ -4,7 +4,7 @@
  *
  * Plantilla de la página de Restaurantes.
  * Se aplica automáticamente a la página con slug «restaurantes»
- * (p. ej. /industrias/restaurantes/) o puede asignarse manualmente
+ * (el menú del tema la enlaza por slug con vlac_page_url) o puede asignarse
  * desde Editor de página → Plantilla.
  *
  * @package Vlac_Systems

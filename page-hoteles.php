@@ -10,7 +10,7 @@
  * cargados a la habitación y la factura al momento de la salida.
  *
  * Se aplica automáticamente a la página con slug «hoteles»
- * (el menú del tema ya apunta a /industrias/hoteles/), o puede asignarse
+ * (el menú del tema la enlaza por slug con vlac_page_url), o puede asignarse
  * a mano desde Atributos de página → Plantilla.
  *
  * IMÁGENES (guárdalas en /assets/img/ con estos nombres exactos, o mejor

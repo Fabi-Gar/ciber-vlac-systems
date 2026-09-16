@@ -145,7 +145,7 @@ $vlac_found = (int) $GLOBALS['wp_query']->found_posts;
 							<a href="<?php echo esc_url( home_url( '/facturacion/' ) ); ?>"><?php esc_html_e( 'Facturador FEL', 'vlac-systems' ); ?></a>
 							<a href="<?php echo esc_url( home_url( '/inventario/' ) ); ?>"><?php esc_html_e( 'Inventario', 'vlac-systems' ); ?></a>
 							<a href="<?php echo esc_url( home_url( '/venta-en-linea/' ) ); ?>"><?php esc_html_e( 'Venta en línea', 'vlac-systems' ); ?></a>
-							<a href="<?php echo esc_url( home_url( '/industrias/punto-de-venta/' ) ); ?>"><?php esc_html_e( 'Punto de venta', 'vlac-systems' ); ?></a>
+							<a href="<?php echo esc_url( vlac_page_url( 'punto-de-venta' ) ); ?>"><?php esc_html_e( 'Punto de venta', 'vlac-systems' ); ?></a>
 							<a href="<?php echo esc_url( home_url( '/precios/' ) ); ?>"><?php esc_html_e( 'Precios', 'vlac-systems' ); ?></a>
 							<a href="<?php echo esc_url( vlac_contact_url() ); ?>"><?php esc_html_e( 'Contacto', 'vlac-systems' ); ?></a>
 						</div>

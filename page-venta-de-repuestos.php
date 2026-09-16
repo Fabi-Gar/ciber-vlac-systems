@@ -11,7 +11,7 @@
  * comisión al vendedor y factura.
  *
  * Se aplica automáticamente a la página con slug «venta-de-repuestos»
- * (el menú del tema ya apunta a /industrias/venta-de-repuestos/), o puede
+ * (el menú del tema la enlaza por slug con vlac_page_url), o puede
  * asignarse a mano desde Atributos de página → Plantilla.
  *
  * IMÁGENES (guárdalas en /assets/img/ con estos nombres exactos, o mejor

@@ -10,7 +10,7 @@
  * y el cobro con factura, incluida la venta de alimento y accesorios.
  *
  * Se aplica automáticamente a la página con slug «veterinarias»
- * (el menú del tema ya apunta a /industrias/veterinarias/), o puede asignarse
+ * (el menú del tema la enlaza por slug con vlac_page_url), o puede asignarse
  * a mano desde Atributos de página → Plantilla.
  *
  * IMÁGENES (guárdalas en /assets/img/ con estos nombres exactos, o mejor

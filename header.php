@@ -95,24 +95,24 @@
 						<div class="mega-grid">
 							<div class="mega-col">
 								<h5>Venta minorista</h5>
-								<a href="<?php echo esc_url( home_url( '/industrias/punto-de-venta/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M4 7h16l-1 12H5L4 7zM8 7V5a4 4 0 018 0v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Punto de venta</a>
-								<a href="<?php echo esc_url( home_url( '/industrias/venta-de-ropa/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M8 4l-4 5 3 2v9h10v-9l3-2-4-5-3 2-1-1-1 1-3-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Venta de ropa</a>
-								<a href="<?php echo esc_url( home_url( '/industrias/ferreteria-y-vidrieria/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M6 9V6a2 2 0 012-2h2v6M14 4h2a2 2 0 012 2v3M4 9h16v11H4V9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Ferretería y vidriería</a>
+								<a href="<?php echo esc_url( vlac_page_url( 'punto-de-venta' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M4 7h16l-1 12H5L4 7zM8 7V5a4 4 0 018 0v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Punto de venta</a>
+								<a href="<?php echo esc_url( vlac_page_url( 'venta-de-ropa' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M8 4l-4 5 3 2v9h10v-9l3-2-4-5-3 2-1-1-1 1-3-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Venta de ropa</a>
+								<a href="<?php echo esc_url( vlac_page_url( 'ferreteria-y-vidrieria' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M6 9V6a2 2 0 012-2h2v6M14 4h2a2 2 0 012 2v3M4 9h16v11H4V9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Ferretería y vidriería</a>
 							</div>
 							<div class="mega-col">
 								<h5>Alimentos y hospitalidad</h5>
-								<a href="<?php echo esc_url( home_url( '/industrias/restaurantes/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M5 3v7a2 2 0 002 2v9M9 3v9M7 3v4M19 3c-2 0-3 3-3 6h3V3zm0 9v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Bar y Restaurantes</a>
-								<a href="<?php echo esc_url( home_url( '/industrias/hoteles/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 21V8l9-4 9 4v13M3 21h18M9 21v-6h6v6M7 11h.01M12 11h.01M17 11h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Hoteles y posadas</a>
+								<a href="<?php echo esc_url( vlac_page_url( 'restaurantes' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M5 3v7a2 2 0 002 2v9M9 3v9M7 3v4M19 3c-2 0-3 3-3 6h3V3zm0 9v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Bar y Restaurantes</a>
+								<a href="<?php echo esc_url( vlac_page_url( 'hoteles' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 21V8l9-4 9 4v13M3 21h18M9 21v-6h6v6M7 11h.01M12 11h.01M17 11h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Hoteles y posadas</a>
 							</div>
 							<div class="mega-col">
 								<h5>Servicios profesionales</h5>
-								<a href="<?php echo esc_url( home_url( '/industrias/clinicas-y-hospitales/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18M8 6h8v4H8zM8 14h8v4H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Clínicas y hospitales</a>
-								<a href="<?php echo esc_url( home_url( '/industrias/veterinarias/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 12a3 3 0 100-6 3 3 0 000 6zM5 21c0-3.9 3.1-7 7-7s7 3.1 7 7M6 6a2 2 0 11-2-2M20 4a2 2 0 11-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Veterinarias</a>
-								<a href="<?php echo esc_url( home_url( '/industrias/talleres/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M14 6l4 4-8 8H6v-4l8-8zM13 7l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Talleres</a>
+								<a href="<?php echo esc_url( vlac_page_url( 'clinicas-y-hospitales' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18M8 6h8v4H8zM8 14h8v4H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Clínicas y hospitales</a>
+								<a href="<?php echo esc_url( vlac_page_url( 'veterinarias' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 12a3 3 0 100-6 3 3 0 000 6zM5 21c0-3.9 3.1-7 7-7s7 3.1 7 7M6 6a2 2 0 11-2-2M20 4a2 2 0 11-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Veterinarias</a>
+								<a href="<?php echo esc_url( vlac_page_url( 'talleres' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M14 6l4 4-8 8H6v-4l8-8zM13 7l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Talleres</a>
 							</div>
 							<div class="mega-col">
 								<h5>Distribución</h5>
-								<a href="<?php echo esc_url( home_url( '/industrias/venta-de-repuestos/' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zm0 0v18M4 7.5l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Venta de repuestos</a>
+								<a href="<?php echo esc_url( vlac_page_url( 'venta-de-repuestos' ) ); ?>"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zm0 0v18M4 7.5l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Venta de repuestos</a>
 							</div>
 						</div>
 						<div class="mega-foot">
@@ -184,13 +184,13 @@
 	</button>
 	<div class="m-acc-body" id="mAccBody">
 		<h6>Venta minorista</h6>
-		<a href="<?php echo esc_url( home_url( '/industrias/punto-de-venta/' ) ); ?>">Punto de venta</a><a href="<?php echo esc_url( home_url( '/industrias/venta-de-ropa/' ) ); ?>">Venta de ropa</a><a href="<?php echo esc_url( home_url( '/industrias/ferreteria-y-vidrieria/' ) ); ?>">Ferretería y vidriería</a>
+		<a href="<?php echo esc_url( vlac_page_url( 'punto-de-venta' ) ); ?>">Punto de venta</a><a href="<?php echo esc_url( vlac_page_url( 'venta-de-ropa' ) ); ?>">Venta de ropa</a><a href="<?php echo esc_url( vlac_page_url( 'ferreteria-y-vidrieria' ) ); ?>">Ferretería y vidriería</a>
 		<h6>Alimentos y hospitalidad</h6>
-		<a href="<?php echo esc_url( home_url( '/industrias/restaurantes/' ) ); ?>">Bar y Restaurantes</a><a href="<?php echo esc_url( home_url( '/industrias/hoteles/' ) ); ?>">Hoteles y posadas</a>
+		<a href="<?php echo esc_url( vlac_page_url( 'restaurantes' ) ); ?>">Bar y Restaurantes</a><a href="<?php echo esc_url( vlac_page_url( 'hoteles' ) ); ?>">Hoteles y posadas</a>
 		<h6>Servicios profesionales</h6>
-		<a href="<?php echo esc_url( home_url( '/industrias/clinicas-y-hospitales/' ) ); ?>">Clínicas y hospitales</a><a href="<?php echo esc_url( home_url( '/industrias/veterinarias/' ) ); ?>">Veterinarias</a><a href="<?php echo esc_url( home_url( '/industrias/talleres/' ) ); ?>">Talleres</a>
+		<a href="<?php echo esc_url( vlac_page_url( 'clinicas-y-hospitales' ) ); ?>">Clínicas y hospitales</a><a href="<?php echo esc_url( vlac_page_url( 'veterinarias' ) ); ?>">Veterinarias</a><a href="<?php echo esc_url( vlac_page_url( 'talleres' ) ); ?>">Talleres</a>
 		<h6>Distribución</h6>
-		<a href="<?php echo esc_url( home_url( '/industrias/venta-de-repuestos/' ) ); ?>">Venta de repuestos</a>
+		<a href="<?php echo esc_url( vlac_page_url( 'venta-de-repuestos' ) ); ?>">Venta de repuestos</a>
 	</div>
 	<a class="m-link" href="<?php echo esc_url( home_url( '/precios/' ) ); ?>">Precios</a>
 	<a class="m-link" href="<?php echo esc_url( vlac_clients_url() ); ?>">Nuestros clientes</a>

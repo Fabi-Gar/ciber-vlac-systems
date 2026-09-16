@@ -198,6 +198,50 @@ function vlac_clients_url() {
 }
 
 /**
+ * Devuelve la URL real de una página a partir de su slug.
+ *
+ * Evita enlazar rutas escritas a mano (p. ej. /industrias/restaurantes/)
+ * que no coinciden con la estructura de páginas de WordPress: en ese caso
+ * WP responde con un 301 hacia la URL real y Google lo reporta como
+ * «Página con redirección». Con este helper el enlace apunta siempre al
+ * permalink actual, aunque la página se mueva bajo una página padre.
+ *
+ * Si no existe ninguna página con ese slug, se usa $fallback (o /slug/).
+ *
+ * @param string $slug     Slug de la página (sin barras).
+ * @param string $fallback Ruta a usar si la página no existe.
+ * @return string
+ */
+function vlac_page_url( $slug, $fallback = '' ) {
+	static $cache = array();
+	if ( isset( $cache[ $slug ] ) ) {
+		return $cache[ $slug ];
+	}
+
+	$page = get_page_by_path( $slug );
+	if ( ! $page ) {
+		// Slug anidado bajo otra página (p. ej. industrias/restaurantes).
+		$pages = get_posts(
+			array(
+				'name'        => $slug,
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+				'numberposts' => 1,
+			)
+		);
+		$page  = ! empty( $pages ) ? $pages[0] : null;
+	}
+
+	if ( $page ) {
+		$cache[ $slug ] = get_permalink( $page->ID );
+	} else {
+		$cache[ $slug ] = home_url( $fallback ? $fallback : '/' . $slug . '/' );
+	}
+
+	return $cache[ $slug ];
+}
+
+/**
  * Lee el JSON de versión del Agente y devuelve array( 'version', 'url' ).
  *
  * El JSON lo publica la API en cada release:
