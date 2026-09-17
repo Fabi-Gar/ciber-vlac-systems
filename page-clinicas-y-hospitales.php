@@ -14,7 +14,8 @@
  *
  * IMÁGENES (guárdalas en /assets/img/ con estos nombres exactos, o mejor
  * elígelas desde el Personalizador):
- *   cli-agenda.png      → agenda de citas del día (va en el hero)
+ *   cli-hero.png        → foto de la clínica o el consultorio para el hero (imagen 1)
+ *   cli-agenda.png      → agenda de citas del día (hero, imagen 2, asoma por detrás)
  *   cli-expediente.png  → historial médico del paciente
  *   cli-formulario.png  → formulario configurable de la consulta
  *   cli-preguntas.png   → listado de preguntas del formulario
@@ -103,23 +104,26 @@ $cli_video = function ( $base, $title, $sub, $opt_key = '' ) use ( $vid_dir, $vi
 	/* Estilos de la página de Clínicas y Hospitales (ámbito local). */
 	#cli-page{--cli-green:#2e9e5b;--cli-slate:#5A6070;}
 
-	/* HERO CENTRADO — a diferencia de las otras páginas de rubro, aquí el
-	   texto va centrado y la captura ocupa todo el ancho debajo. */
+	/* HERO — mismo esquema que la página de hoteles: texto a la izquierda y
+	   a la derecha dos imágenes: la foto de la clínica al frente y la captura
+	   de la agenda asomando por detrás. */
 	#cli-page .cli-hero{position:relative;overflow:hidden;}
-	#cli-page .cli-hero::before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(680px 420px at 50% -6%,rgba(193,39,45,.09),transparent 62%),linear-gradient(180deg,#fff,var(--bg-alt));}
-	#cli-page .cli-hero .inner{position:relative;z-index:1;padding:62px 0 88px;text-align:center;}
-	#cli-page .cli-hero h1{font-size:clamp(32px,4.4vw,50px);font-weight:800;max-width:830px;margin:0 auto;}
-	#cli-page .cli-hero .lead{color:var(--muted);font-size:18px;margin:22px auto 0;max-width:620px;}
-	#cli-page .cli-hero .hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:30px;}
-	#cli-page .cli-hero .hero-note{display:flex;align-items:center;justify-content:center;gap:8px;font-size:13.5px;color:var(--muted);margin-top:22px;flex-wrap:wrap;}
+	#cli-page .cli-hero::before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(760px 400px at 88% 4%,rgba(193,39,45,.08),transparent 60%),linear-gradient(180deg,#fff,var(--bg-alt));}
+	#cli-page .cli-hero .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.05fr;gap:52px;align-items:center;padding:66px 0 108px;}
+	#cli-page .cli-hero h1{font-size:clamp(32px,4.4vw,50px);font-weight:800;}
+	#cli-page .cli-hero .lead{color:var(--muted);font-size:18px;margin:20px 0 8px;max-width:520px;}
+	#cli-page .cli-hero .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;}
+	#cli-page .cli-hero .hero-note{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);margin-top:22px;flex-wrap:wrap;}
 	#cli-page .cli-hero .hero-note svg{width:16px;height:16px;color:var(--cli-green);flex-shrink:0;}
 
-	/* Escenario del hero: la captura de la agenda a todo lo ancho */
-	#cli-page .cli-stage{position:relative;max-width:960px;margin:52px auto 0;}
+	/* Columna visual: foto (imagen 1) + captura de la agenda (imagen 2) */
+	#cli-page .cli-visual{position:relative;}
+	#cli-page .cli-hero-photo{position:relative;z-index:2;width:100%;height:auto;display:block;border-radius:var(--radius);box-shadow:var(--shadow-lg);object-fit:cover;}
+	#cli-page .cli-visual > .cli-frame{position:relative;z-index:2;}
+	#cli-page .cli-visual .cli-stage .cli-frame{box-shadow:var(--shadow-lg);}
 
 	/* MARCO (estilo navegador) para capturas y videos */
 	#cli-page .cli-frame{background:#fff;border:1px solid #d9d9de;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-md);}
-	#cli-page .cli-stage .cli-frame{box-shadow:var(--shadow-lg);}
 	#cli-page .cli-frame .bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#f3f3f5;border-bottom:1px solid #e6e6ea;}
 	#cli-page .cli-frame .bar i{width:10px;height:10px;border-radius:50%;background:#d6d6dc;display:block;}
 	#cli-page .cli-frame video,#cli-page .cli-frame img{width:100%;height:auto;display:block;background:#000;}
@@ -204,9 +208,20 @@ $cli_video = function ( $base, $title, $sub, $opt_key = '' ) use ( $vid_dir, $vi
 		#cli-page .cli-split.rev .cli-split-media{order:0;}
 		#cli-page .cli-inline-shot{max-width:none;}
 	}
+	/* La captura de la agenda asoma por detrás de la foto (pantallas grandes),
+	   siempre dentro de su columna: nunca se monta sobre el texto del hero. */
+	@media (min-width:1001px){
+		#cli-page .cli-stage{position:absolute;z-index:1;left:0;bottom:-70px;width:min(430px,100%);transform:rotate(-2deg);transform-origin:bottom left;}
+		#cli-page .cli-visual > .cli-hero-photo,
+		#cli-page .cli-visual > .cli-frame{width:88%;margin-left:auto;}
+	}
+	@media (max-width:1000px){
+		#cli-page .cli-stage{margin-top:18px;}
+	}
+	@media (max-width:900px){
+		#cli-page .cli-hero .hero-grid{grid-template-columns:1fr;gap:34px;padding:52px 0 62px;}
+	}
 	@media (max-width:640px){
-		#cli-page .cli-hero .inner{padding:48px 0 62px;}
-		#cli-page .cli-stage{margin-top:34px;}
 		#cli-page .cli-bento{grid-template-columns:1fr;}
 		#cli-page .cli-cell.big{grid-column:auto;}
 		#cli-page .cli-caps{grid-template-columns:1fr;}
@@ -218,21 +233,41 @@ $cli_video = function ( $base, $title, $sub, $opt_key = '' ) use ( $vid_dir, $vi
 	<!-- HERO -->
 	<section class="cli-hero">
 		<div class="wrap">
-			<div class="inner">
-				<span class="eyebrow"><span class="dot"></span> <?php echo esc_html( vlac_opt( 'cli_eyebrow', 'Clínicas y Hospitales' ) ); ?></span>
-				<h1><?php echo wp_kses_post( vlac_opt( 'cli_title', 'El sistema para tu <span class="accent">clínica</span> u <span class="accent">hospital</span>' ) ); ?></h1>
-				<p class="lead"><?php echo esc_html( vlac_opt( 'cli_sub', 'Agenda las citas, atiende la consulta con tus propios formularios, emite recetas y guarda todo en el expediente del paciente, con el cobro y la factura en el mismo lugar.' ) ); ?></p>
-				<div class="hero-cta">
-					<a class="btn btn-red btn-lg" href="<?php echo esc_url( vlac_cta_url( 'hero_cta1_url' ) ); ?>"><?php echo esc_html( vlac_opt( 'hero_cta1_txt', 'Prueba gratis' ) ); ?></a>
-					<a class="btn btn-ghost" href="<?php echo esc_url( vlac_opt( 'hero_cta2_url', '#' ) ); ?>"><?php echo esc_html( vlac_opt( 'hero_cta2_txt', 'Ver una demo' ) ); ?></a>
-				</div>
-				<div class="hero-note">
-					<svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					Agenda · Expediente · Recetas · Vacunas · Facturación
+			<div class="hero-grid">
+				<div class="hero-copy">
+					<span class="eyebrow"><span class="dot"></span> <?php echo esc_html( vlac_opt( 'cli_eyebrow', 'Clínicas y Hospitales' ) ); ?></span>
+					<h1><?php echo wp_kses_post( vlac_opt( 'cli_title', 'El sistema para tu <span class="accent">clínica</span> u <span class="accent">hospital</span>' ) ); ?></h1>
+					<p class="lead"><?php echo esc_html( vlac_opt( 'cli_sub', 'Agenda las citas, atiende la consulta con tus propios formularios, emite recetas y guarda todo en el expediente del paciente, con el cobro y la factura en el mismo lugar.' ) ); ?></p>
+					<div class="hero-cta">
+						<a class="btn btn-red btn-lg" href="<?php echo esc_url( vlac_cta_url( 'hero_cta1_url' ) ); ?>"><?php echo esc_html( vlac_opt( 'hero_cta1_txt', 'Prueba gratis' ) ); ?></a>
+						<a class="btn btn-ghost" href="<?php echo esc_url( vlac_opt( 'hero_cta2_url', '#' ) ); ?>"><?php echo esc_html( vlac_opt( 'hero_cta2_txt', 'Ver una demo' ) ); ?></a>
+					</div>
+					<div class="hero-note">
+						<svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						Agenda · Expediente · Recetas · Vacunas · Facturación
+					</div>
 				</div>
 
-				<div class="cli-stage">
-					<?php $cli_shot( 'cli-agenda.png', 'cli_img_agenda', 'Agenda de citas' ); ?>
+				<div class="cli-visual">
+					<?php
+					// Imagen 1: foto de la clínica o el consultorio (va al frente).
+					// Prioridad: imagen del Personalizador, luego /assets/img/cli-hero.png,
+					// y si no hay, un marcador con las instrucciones.
+					$cli_hero_url = vlac_opt( 'cli_img_hero' );
+					if ( ! $cli_hero_url && file_exists( $img_dir . 'cli-hero.png' ) ) {
+						$cli_hero_url = $img . '/cli-hero.png';
+					}
+					if ( $cli_hero_url ) {
+						printf( '<img class="cli-hero-photo" src="%s" alt="%s" loading="lazy" />', esc_url( $cli_hero_url ), esc_attr( get_the_title() ) );
+					} else {
+						echo '<div class="cli-frame"><div class="cli-ph cli-ph-img">Sube una foto de la clínica o el consultorio en <b>Personalizar → Página Clínicas y Hospitales → Hero</b><br>o el archivo <code>assets/img/cli-hero.png</code></div></div>';
+					}
+					?>
+
+					<!-- Imagen 2: captura de la agenda de citas (asoma por detrás de la foto) -->
+					<div class="cli-stage">
+						<?php $cli_shot( 'cli-agenda.png', 'cli_img_agenda', 'Agenda de citas' ); ?>
+					</div>
 				</div>
 			</div>
 		</div>

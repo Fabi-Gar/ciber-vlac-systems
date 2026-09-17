@@ -834,7 +834,8 @@ function vlac_customize_register( $wp_customize ) {
 	// Capturas de pantalla (selector de medios de WordPress). Si se elige una
 	// imagen aquí, tiene prioridad sobre el archivo de /assets/img/.
 	$cli_images = array(
-		'cli_img_agenda'     => __( 'Hero · Agenda de citas del día', 'vlac-systems' ),
+		'cli_img_hero'       => __( 'Hero · Imagen 1: foto de la clínica o el consultorio (va al frente)', 'vlac-systems' ),
+		'cli_img_agenda'     => __( 'Hero · Imagen 2: agenda de citas del día (asoma por detrás)', 'vlac-systems' ),
 		'cli_img_expediente' => __( 'Historial médico del paciente', 'vlac-systems' ),
 		'cli_img_formulario' => __( 'Formulario configurable de la consulta', 'vlac-systems' ),
 		'cli_img_preguntas'  => __( 'Listado de preguntas del formulario', 'vlac-systems' ),
